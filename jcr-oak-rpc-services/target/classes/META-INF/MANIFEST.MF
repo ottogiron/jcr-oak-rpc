@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1402123135023
+Build-Jdk: 1.8.0_05
+Built-By: otto
+Bundle-Category: jcr-oak-rpc
+Bundle-ManifestVersion: 2
+Bundle-Name: jcr-oak-rpc-services
+Bundle-SymbolicName: org.jumlabs.jcr-oak-rpc-services
+Bundle-Vendor: JumLabs
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Embed-Transitive: true
+Export-Package: org.jumlabs.jcr.oak.rpc.services;uses:="org.osgi.framewo
+ rk";version="1.0.0.SNAPSHOT"
+Import-Package: org.osgi.framework;resolution:=optional;version="[1.7,2)
+ ",org.slf4j;resolution:=optional;version="[1.7,2)"
+Service-Component: OSGI-INF/org.jumlabs.jcr.oak.rpc.services.TestService
+ Impl.xml
+Tool: Bnd-2.1.0.20130426-122213

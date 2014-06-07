@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+    <scr:component immediate="true" name="org.jumlabs.jcr.oak.rpc.services.TestServiceImpl" activate="activate">
+        <implementation class="org.jumlabs.jcr.oak.rpc.services.TestServiceImpl"/>
+        <service servicefactory="false">
+            <provide interface="org.jumlabs.jcr.oak.rpc.services.TestService"/>
+        </service>
+        <property name="service.vendor" value="JumLabs"/>
+        <property name="service.pid" value="org.jumlabs.jcr.oak.rpc.services.TestServiceImpl"/>
+    </scr:component>
+</components>
