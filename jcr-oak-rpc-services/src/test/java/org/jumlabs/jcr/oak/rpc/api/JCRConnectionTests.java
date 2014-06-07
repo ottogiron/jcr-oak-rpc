@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package org.jumlabs.jcr.oak.rpc.services;
+package org.jumlabs.jcr.oak.rpc.api;
 
 
 import javax.jcr.SimpleCredentials;
