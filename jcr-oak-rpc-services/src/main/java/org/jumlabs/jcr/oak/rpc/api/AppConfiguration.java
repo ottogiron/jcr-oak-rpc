@@ -19,6 +19,7 @@ import org.apache.jackrabbit.oak.plugins.nodetype.write.InitialContent;
 import org.apache.jackrabbit.oak.security.SecurityProviderImpl;
 import org.apache.jackrabbit.oak.spi.commit.DefaultEditor;
 import org.apache.jackrabbit.oak.spi.state.NodeStore;
+import org.jumlabs.jcr.oak.rpc.api.impl.SessionImpl;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +32,7 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfiguration {
     private  static final Logger logger = LoggerFactory.getLogger(AppConfiguration.class);
     
-    
+    @Bean 
     public MongoConnection mongoConnection(){
         MongoClientURI uri = new MongoClientURI("mongodb://localhost/MongoMKDB");
         MongoConnection mongo = null;
@@ -44,7 +45,7 @@ public class AppConfiguration {
     }
     
     
-    
+    @Bean
     public NodeStore nodeStore(){
         NodeStore store;
         store = new DocumentMK.Builder().
@@ -66,4 +67,15 @@ public class AppConfiguration {
         return repository;
     }
     
+    @Bean
+    public Session session(){
+        Session session = new SessionImpl();
+        return session;
+    }
+    
+   @Bean
+   public TSession.Processor sessionProcessor(){
+       TSession.Processor processor = new TSession.Processor(session());
+       return processor;
+   }
 }

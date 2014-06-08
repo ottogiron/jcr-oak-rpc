@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.jumlabs.jcr.oak.rpc.util.RepositoryUtilTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 44.688 sec - in org.jumlabs.jcr.oak.rpc.util.RepositoryUtilTests
