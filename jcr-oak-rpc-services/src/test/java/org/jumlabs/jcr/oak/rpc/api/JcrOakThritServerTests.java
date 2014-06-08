@@ -8,17 +8,13 @@ package org.jumlabs.jcr.oak.rpc.api;
 import org.apache.thrift.TMultiplexedProcessor;
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.server.ServerContext;
 import org.apache.thrift.server.THsHaServer;
 import org.apache.thrift.server.TServer;
-import org.apache.thrift.server.TServerEventHandler;
 import org.apache.thrift.server.TSimpleServer;
 import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
-import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,17 +27,21 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author otto
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/spring-config.xml")
+@ContextConfiguration("/META-INF/spring/spring-config.xml")
 public class JcrOakThritServerTests {
 
     @Autowired
     private TSession.Processor sessionProcesor;
+    
+    @Autowired
+    private TRoot.Processor rootProcessor;
 
     @Test
     public void testServerServe() throws TTransportException {
         //simple(sessionProcesor);
         TMultiplexedProcessor processor = new TMultiplexedProcessor();
         processor.registerProcessor("TSession",sessionProcesor);
+        processor.registerProcessor("TRoot", rootProcessor);
         nonBlocking(processor);
     }
 

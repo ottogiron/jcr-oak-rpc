@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author otto
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/spring-config.xml")
+@ContextConfiguration("/META-INF/spring/spring-config.xml")
 public class RepositoryUtilTests {
  
     

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1402174523428
+Bnd-LastModified: 1402208006252
 Build-Jdk: 1.8.0_05
 Built-By: otto
 Bundle-Category: jcr-oak-rpc

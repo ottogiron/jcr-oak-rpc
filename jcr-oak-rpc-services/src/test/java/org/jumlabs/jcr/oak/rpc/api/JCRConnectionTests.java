@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
  * @author otto
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/spring-config.xml")
+@ContextConfiguration("/META-INF/spring/spring-config.xml")
 public class JCRConnectionTests {
     
     

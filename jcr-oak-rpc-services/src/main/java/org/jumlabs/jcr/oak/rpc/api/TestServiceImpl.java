@@ -18,13 +18,11 @@ import org.slf4j.LoggerFactory;
  *
  * @author otto
  */
-@Service
-@Component(immediate = true)
 public class TestServiceImpl implements TestService{
 private static Logger logger = LoggerFactory.getLogger(TestServiceImpl.class);
 
 
-@Activate
+
 protected void activate(BundleContext bundleContext){
     logger.info("Hello world");
     logger.debug("Hello workl debuging");    

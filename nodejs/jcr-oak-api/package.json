@@ -1,5 +1,5 @@
 {
-  "name": "jcr-oak-rpc-api-nodejs",
+  "name": "jcr-oak-api",
   "version": "0.0.0",
   "main": "lib/jcr-oak-rpc-api-nodejs.js",
   "description": "Api for accessing Jacrabbit oak repository through nodejs",

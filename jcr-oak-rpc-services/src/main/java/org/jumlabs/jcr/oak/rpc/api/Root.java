@@ -5,12 +5,11 @@
  */
 
 package org.jumlabs.jcr.oak.rpc.api;
-import org.springframework.cglib.core.ReflectUtils;
 
 /**
  *
  * @author otto
  */
-public interface TestService {
-    void sayHello();
+public interface Root extends TRoot.Iface {
+    
 }

@@ -22,12 +22,10 @@ import static org.junit.Assert.*;
  * @author otto
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/spring-config.xml")
+@ContextConfiguration("/META-INF/spring/spring-config.xml")
 public class JcrOakThritClientTests {
 
-    @Autowired
-    private TSession.Processor sessionProcesor;
-
+  
     @Test
     public void testServerServe() throws TTransportException, TException {
         TTransport transport;

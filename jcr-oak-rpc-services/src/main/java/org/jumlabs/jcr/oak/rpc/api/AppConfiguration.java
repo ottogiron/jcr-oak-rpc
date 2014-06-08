@@ -8,6 +8,8 @@ package org.jumlabs.jcr.oak.rpc.api;
 
 import com.mongodb.MongoClientURI;
 import java.net.UnknownHostException;
+import javax.jcr.Credentials;
+import javax.jcr.SimpleCredentials;
 import org.apache.jackrabbit.oak.Oak;
 import org.apache.jackrabbit.oak.api.ContentRepository;
 import org.apache.jackrabbit.oak.plugins.document.DocumentMK;
@@ -19,6 +21,8 @@ import org.apache.jackrabbit.oak.plugins.nodetype.write.InitialContent;
 import org.apache.jackrabbit.oak.security.SecurityProviderImpl;
 import org.apache.jackrabbit.oak.spi.commit.DefaultEditor;
 import org.apache.jackrabbit.oak.spi.state.NodeStore;
+import org.jumlabs.jcr.oak.rpc.api.impl.RepositoryImpl;
+import org.jumlabs.jcr.oak.rpc.api.impl.RootImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.SessionImpl;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -54,6 +58,12 @@ public class AppConfiguration {
         return store;
     }
     
+    
+    @Bean
+    public Credentials adminCredentials(){
+        return new SimpleCredentials("admin", "admin".toCharArray());
+    }
+    
     @Bean
     public ContentRepository contentRepository(){
         ContentRepository repository;
@@ -73,9 +83,31 @@ public class AppConfiguration {
         return session;
     }
     
+    
+    @Bean
+    public Repository repository(){
+        return new  RepositoryImpl();
+    }
+    
+    @Bean Root root(){
+        Root root = new RootImpl();
+        return root;
+    }
+    
+    @Bean(name = "testService")
+    public TestService testService(){
+        return new TestServiceImpl();
+    }
+    
    @Bean
    public TSession.Processor sessionProcessor(){
        TSession.Processor processor = new TSession.Processor(session());
+       return processor;
+   }
+   
+   @Bean 
+   public TRoot.Processor rootProcessor(){
+       TRoot.Processor processor = new TRoot.Processor(root());
        return processor;
    }
 }

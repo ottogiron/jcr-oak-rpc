@@ -36,20 +36,20 @@ exports.jcrOakRpcApiNodejs = {
 
         var connection = thrift.createConnection('localhost', 9090, {transport: thrift.TFramedTransport}),
         multiplexer = new  thrift.Multiplexer(),
-        session =  multiplexer.createClient('TSession',TSession,connection);
+        session =  multiplexer.createClient('TRoot',TSession,connection);
         
         
         connection.on('error', function(err) {
             console.error(err);
             test.done();
         });
-
-        session.getTree('/', function(error, tree) {
+        var path = "/etc";
+        session.getTree(path, function(error, tree) {
             if (error) {
                 console.log(error);
             } else {
                 test.ok(tree, 'Session has not returned a result');
-                test.equal(tree.path, '/', 'The path of the tree should be equal the required path /');
+                test.equal(tree.path, path, 'The path of the tree should be equal the required path /');
                 console.log(tree);
                 connection.end();
             }
