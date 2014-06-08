@@ -12,6 +12,7 @@ nbproject/private/
 *.swp
 *.out
 
-
+*/target/*
+jcr-oak-rpc-services/target/
 jcr-oak-rpc-services/target/surefire-reports/
 /jcr-oak-rpc-api-nodejs/nbproject/private/
