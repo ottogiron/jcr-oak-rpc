@@ -3,6 +3,7 @@
 var jcrOakRpcApiNodejs = require('../lib/jcr-oak-rpc-api-nodejs.js'),
         thrift = require('thrift'),
         TSession = require('../node_modules/jcr-oak-api/TSession'),
+        TRoot = require('../node_modules/jcr-oak-api/TRoot'),
         sessiontypes = require('../node_modules/jcr-oak-api/session_types'),
         treetypes = require('../node_modules/jcr-oak-api/tree_types');
 
@@ -36,15 +37,14 @@ exports.jcrOakRpcApiNodejs = {
 
         var connection = thrift.createConnection('localhost', 9090, {transport: thrift.TFramedTransport}),
         multiplexer = new  thrift.Multiplexer(),
-        session =  multiplexer.createClient('TRoot',TSession,connection);
-        
+        root =  multiplexer.createClient('TRoot',TRoot,connection);        
         
         connection.on('error', function(err) {
             console.error(err);
             test.done();
         });
-        var path = "/etc";
-        session.getTree(path, function(error, tree) {
+        var path = "/";
+        root.getTree(path, function(error, tree) {
             if (error) {
                 console.log(error);
             } else {

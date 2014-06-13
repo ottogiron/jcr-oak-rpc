@@ -32,7 +32,7 @@ public class JcrOakThritClientTests {
         transport = new TSocket("localhost", 9090);
         transport.open();
         TProtocol protocol = new TBinaryProtocol(transport);
-        TSession.Client client = new TSession.Client(protocol);
+        TRoot.Client client = new TRoot.Client(protocol);
         TTree tree = client.getTree("/");
         System.out.println(tree.getName());
         assertEquals("/", tree.getPath());

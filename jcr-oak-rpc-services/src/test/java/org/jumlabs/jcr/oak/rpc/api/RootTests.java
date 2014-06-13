@@ -26,19 +26,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/spring/spring-config.xml")
-public class SessionTests {
+public class RootTests {
     
     @Autowired
-    private Session session;
+    private JRoot root;
     
     @Autowired
-    private Repository repository;
+    private JRepository repository;
     
     @Test
     public void testGetTree() throws TException, LoginException, NoSuchWorkspaceException{
         ContentSession csession = repository.logginAdministrative(null);
         Tree oriTree = csession.getLatestRoot().getTree("/");        
-        TTree tree = session.getTree("/");        
+        TTree tree = root.getTree("/");        
                
         assertEquals(oriTree.getPath(),tree.getPath());
         assertEquals(oriTree.isRoot(),tree.isRoot());

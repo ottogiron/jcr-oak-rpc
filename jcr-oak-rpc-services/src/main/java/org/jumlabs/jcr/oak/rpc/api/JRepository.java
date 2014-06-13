@@ -14,7 +14,7 @@ import org.apache.jackrabbit.oak.api.ContentSession;
  *
  * @author otto
  */
-public interface Repository {
+public interface JRepository {
 
     ContentSession logginAdministrative(String workspaceName) throws LoginException, NoSuchWorkspaceException;
     

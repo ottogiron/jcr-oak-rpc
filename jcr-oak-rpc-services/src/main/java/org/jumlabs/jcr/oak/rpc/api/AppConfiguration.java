@@ -22,8 +22,7 @@ import org.apache.jackrabbit.oak.security.SecurityProviderImpl;
 import org.apache.jackrabbit.oak.spi.commit.DefaultEditor;
 import org.apache.jackrabbit.oak.spi.state.NodeStore;
 import org.jumlabs.jcr.oak.rpc.api.impl.RepositoryImpl;
-import org.jumlabs.jcr.oak.rpc.api.impl.RootImpl;
-import org.jumlabs.jcr.oak.rpc.api.impl.SessionImpl;
+import org.jumlabs.jcr.oak.rpc.api.impl.JRootImpl;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -77,20 +76,14 @@ public class AppConfiguration {
         return repository;
     }
     
-    @Bean
-    public Session session(){
-        Session session = new SessionImpl();
-        return session;
-    }
-    
     
     @Bean
-    public Repository repository(){
+    public JRepository repository(){
         return new  RepositoryImpl();
     }
     
-    @Bean Root root(){
-        Root root = new RootImpl();
+    @Bean JRoot root(){
+        JRoot root = new JRootImpl();
         return root;
     }
     
@@ -99,12 +92,7 @@ public class AppConfiguration {
         return new TestServiceImpl();
     }
     
-   @Bean
-   public TSession.Processor sessionProcessor(){
-       TSession.Processor processor = new TSession.Processor(session());
-       return processor;
-   }
-   
+
    @Bean 
    public TRoot.Processor rootProcessor(){
        TRoot.Processor processor = new TRoot.Processor(root());

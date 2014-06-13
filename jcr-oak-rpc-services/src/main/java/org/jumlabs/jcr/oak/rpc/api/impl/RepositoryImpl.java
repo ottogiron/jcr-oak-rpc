@@ -6,7 +6,7 @@
 package org.jumlabs.jcr.oak.rpc.api.impl;
 
 
-import org.jumlabs.jcr.oak.rpc.api.Repository;
+import org.jumlabs.jcr.oak.rpc.api.JRepository;
 import javax.jcr.Credentials;
 import javax.jcr.NoSuchWorkspaceException;
 import javax.security.auth.login.LoginException;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author otto
  */
-public class RepositoryImpl implements Repository {
+public class RepositoryImpl implements JRepository {
     
     @Autowired
     private ContentRepository repository;

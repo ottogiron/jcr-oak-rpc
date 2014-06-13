@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1402208006252
+Bnd-LastModified: 1402632976858
 Build-Jdk: 1.8.0_05
 Built-By: otto
 Bundle-Category: jcr-oak-rpc
@@ -12,4 +12,5 @@ Created-By: Apache Maven Bundle Plugin
 Embed-Transitive: true
 Export-Package: org.jumlabs.jcr.oak.rpc.services;version="1.0.0.SNAPSHOT
  "
+Originally-Created-By: Apache Maven Bundle Plugin
 Tool: Bnd-2.1.0.20130426-122213

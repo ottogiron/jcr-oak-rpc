@@ -1,6 +1,6 @@
 namespace java org.jumlabs.jcr.oak.rpc.api
 
-enum TStatus {
+enum TTreeStatus {
    UNCHANGED, NEW, MODIFIED
 }
 
@@ -9,7 +9,17 @@ struct TTree {
   2: bool root,
   3: bool exists,
   4: string name, 
-  5: TStatus status;
+  5: TTreeStatus status
 }
+
+
+
+service TTreeService{
+  TTree addChild(1:string name, 2:TTree tree),
+  list<TTree> getChildren(1:TTree tree),
+  TTree getChild(1:string name, 2:TTree tree),
+  TTree getParent(1:TTree tree),  
+}
+
 
 

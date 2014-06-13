@@ -30,8 +30,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration("/META-INF/spring/spring-config.xml")
 public class JcrOakThritServerTests {
 
-    @Autowired
-    private TSession.Processor sessionProcesor;
+
     
     @Autowired
     private TRoot.Processor rootProcessor;
@@ -39,8 +38,7 @@ public class JcrOakThritServerTests {
     @Test
     public void testServerServe() throws TTransportException {
         //simple(sessionProcesor);
-        TMultiplexedProcessor processor = new TMultiplexedProcessor();
-        processor.registerProcessor("TSession",sessionProcesor);
+        TMultiplexedProcessor processor = new TMultiplexedProcessor();        
         processor.registerProcessor("TRoot", rootProcessor);
         nonBlocking(processor);
     }
