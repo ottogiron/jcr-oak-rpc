@@ -33,13 +33,17 @@ public class JcrOakThritServerTests {
 
     
     @Autowired
-    private TRoot.Processor rootProcessor;
+    private TRootService.Processor rootProcessor;
+    
+    @Autowired
+    private TTreeService.Processor treeProcessor;
 
     @Test
     public void testServerServe() throws TTransportException {
         //simple(sessionProcesor);
         TMultiplexedProcessor processor = new TMultiplexedProcessor();        
-        processor.registerProcessor("TRoot", rootProcessor);
+        processor.registerProcessor("TRootService", rootProcessor);
+        processor.registerProcessor("TTreeService", treeProcessor);
         nonBlocking(processor);
     }
 

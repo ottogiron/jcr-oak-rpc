@@ -22,16 +22,8 @@ public enum TType implements org.apache.thrift.TEnum {
   DOUBLES(7),
   LONG(8),
   LONGS(9),
-  NAME(10),
-  NAMES(11),
-  PATH(12),
-  PATHS(13),
-  STRING(14),
-  STRINGS(15),
-  UNDEFINED(16),
-  UNDEFINEDS(17),
-  URI(18),
-  URIS(19);
+  STRING(10),
+  STRINGS(11);
 
   private final int value;
 
@@ -73,25 +65,9 @@ public enum TType implements org.apache.thrift.TEnum {
       case 9:
         return LONGS;
       case 10:
-        return NAME;
-      case 11:
-        return NAMES;
-      case 12:
-        return PATH;
-      case 13:
-        return PATHS;
-      case 14:
         return STRING;
-      case 15:
+      case 11:
         return STRINGS;
-      case 16:
-        return UNDEFINED;
-      case 17:
-        return UNDEFINEDS;
-      case 18:
-        return URI;
-      case 19:
-        return URIS;
       default:
         return null;
     }

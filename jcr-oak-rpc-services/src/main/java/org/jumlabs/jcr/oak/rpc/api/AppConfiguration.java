@@ -23,6 +23,7 @@ import org.apache.jackrabbit.oak.spi.commit.DefaultEditor;
 import org.apache.jackrabbit.oak.spi.state.NodeStore;
 import org.jumlabs.jcr.oak.rpc.api.impl.RepositoryImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.JRootImpl;
+import org.jumlabs.jcr.oak.rpc.api.impl.JTreeServiceImpl;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -82,9 +83,15 @@ public class AppConfiguration {
         return new  RepositoryImpl();
     }
     
-    @Bean JRoot root(){
-        JRoot root = new JRootImpl();
+    @Bean JRootService root(){
+        JRootService root = new JRootImpl();
         return root;
+    }
+    
+    @Bean 
+    public JTreeService treeService(){
+        JTreeService service = new JTreeServiceImpl();
+        return service;
     }
     
     @Bean(name = "testService")
@@ -94,8 +101,14 @@ public class AppConfiguration {
     
 
    @Bean 
-   public TRoot.Processor rootProcessor(){
-       TRoot.Processor processor = new TRoot.Processor(root());
+   public TRootService.Processor rootProcessor(){
+       TRootService.Processor processor = new TRootService.Processor(root());
+       return processor;
+   }
+   
+   @Bean 
+   public TTreeService.Processor treeProcessor(){
+       TTreeService.Processor processor = new TTreeService.Processor<>(treeService());
        return processor;
    }
 }

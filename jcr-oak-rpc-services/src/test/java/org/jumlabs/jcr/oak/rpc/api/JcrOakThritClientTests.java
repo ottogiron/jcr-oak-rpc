@@ -24,7 +24,9 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/spring/spring-config.xml")
 public class JcrOakThritClientTests {
-
+    
+    @Autowired
+    private TTreeService treeService;
   
     @Test
     public void testServerServe() throws TTransportException, TException {
@@ -32,7 +34,7 @@ public class JcrOakThritClientTests {
         transport = new TSocket("localhost", 9090);
         transport.open();
         TProtocol protocol = new TBinaryProtocol(transport);
-        TRoot.Client client = new TRoot.Client(protocol);
+        TRootService.Client client = new TRootService.Client(protocol);
         TTree tree = client.getTree("/");
         System.out.println(tree.getName());
         assertEquals("/", tree.getPath());

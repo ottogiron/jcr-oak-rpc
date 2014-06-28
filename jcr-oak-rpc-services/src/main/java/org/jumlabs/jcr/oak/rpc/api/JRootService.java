@@ -10,6 +10,6 @@ package org.jumlabs.jcr.oak.rpc.api;
  *
  * @author otto
  */
-public interface JRoot extends TRoot.Iface {
+public interface JRootService extends TRootService.Iface {
     
 }
