@@ -11,7 +11,6 @@ import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.THsHaServer;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
-import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
@@ -61,11 +60,8 @@ public class JcrOakThritServerTests {
         TNonblockingServerSocket serverTransport = new TNonblockingServerSocket(9090);
         THsHaServer server = new THsHaServer(
                 new THsHaServer.Args(serverTransport)
-                .processor(processor)
-                .transportFactory(new TFramedTransport.Factory())
-                .protocolFactory(
-                        new TBinaryProtocol.Factory(false, false)));
-       
+                .processor(processor)                
+                .protocolFactory(new TBinaryProtocol.Factory(false, false)));       
         System.out.println("Starting server on port 9090 ...");
         server.serve();
     }
