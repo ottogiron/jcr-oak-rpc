@@ -45,13 +45,13 @@ public class JTreeServiceImpl implements JTreeService {
 
     @Override
     public TTree addChild(String name, TTree ttree) throws TException {
-        TTree childTTree = null;
+       TTree childTTree = null;
         try {
             Root root = RepositoryUtils.getJCRRoot(repository);
             Tree tree = root.getTree(ttree.getPath());
             Tree childTree = tree.addChild(name);
-            childTTree = RepositoryUtils.toTTree(childTree);
             root.commit();
+            childTTree = RepositoryUtils.toTTree(childTree);            
         } catch (LoginException | NoSuchWorkspaceException | CommitFailedException ex) {
             logger.error(ex.getMessage(), ex);
         }

@@ -22,7 +22,7 @@ import org.apache.jackrabbit.oak.security.SecurityProviderImpl;
 import org.apache.jackrabbit.oak.spi.commit.DefaultEditor;
 import org.apache.jackrabbit.oak.spi.state.NodeStore;
 import org.jumlabs.jcr.oak.rpc.api.impl.RepositoryImpl;
-import org.jumlabs.jcr.oak.rpc.api.impl.JRootImpl;
+import org.jumlabs.jcr.oak.rpc.api.impl.JRootServiceImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.JTreeServiceImpl;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -84,7 +84,7 @@ public class AppConfiguration {
     }
     
     @Bean JRootService root(){
-        JRootService root = new JRootImpl();
+        JRootService root = new JRootServiceImpl();
         return root;
     }
     

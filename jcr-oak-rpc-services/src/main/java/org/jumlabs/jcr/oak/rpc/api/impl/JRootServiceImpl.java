@@ -14,11 +14,9 @@ import org.apache.thrift.TException;
 import org.jumlabs.jcr.oak.rpc.api.JRepository;
 import org.jumlabs.jcr.oak.rpc.api.JRootService;
 import org.jumlabs.jcr.oak.rpc.api.TTree;
-import org.jumlabs.jcr.oak.rpc.api.TTreeStatus;
 import org.jumlabs.jcr.oak.rpc.util.RepositoryUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,9 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author otto
  */
-public class JRootImpl implements JRootService {
+public class JRootServiceImpl implements JRootService {
 
-    private static final Logger logger = LoggerFactory.getLogger(JRootImpl.class);    
+    private static final Logger logger = LoggerFactory.getLogger(JRootServiceImpl.class);    
     
     @Autowired
     private JRepository repository;
