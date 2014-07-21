@@ -1,0 +1,3 @@
+[submodule "nodejs/jcr-oak-api"]
+	path = nodejs/jcr-oak-api
+	url = https://github.com/ottogiron/jcr-oak-rpc-nodejs
