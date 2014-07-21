@@ -2,8 +2,8 @@
 
 var jcrOakRpcApiNodejs = require('../lib/jcr-oak-rpc-api-nodejs.js'),
         thrift = require('thrift'),        
-        TRoot = require('../node_modules/jcr-oak-api/TRootService'),        
-        treetypes = require('../node_modules/jcr-oak-api/tree_types');
+        TRoot = require('../lib/TRootService'),        
+        treetypes = require('../lib/tree_types');
 
 
 /*
