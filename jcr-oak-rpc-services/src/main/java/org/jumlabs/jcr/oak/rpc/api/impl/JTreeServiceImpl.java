@@ -30,7 +30,6 @@ import org.jumlabs.jcr.oak.rpc.api.TType;
 import org.jumlabs.jcr.oak.rpc.util.RepositoryUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -103,7 +102,7 @@ public class JTreeServiceImpl implements JTreeService {
     }
 
     @Override
-    public Map<String, TPropertyState> getPropertiesValue(List<String> propertyNames, TTree ttree) throws TException {
+    public Map<String, TPropertyState> getPropertiesByNames(List<String> propertyNames, TTree ttree) throws TException {
         Map<String, TPropertyState> tPropertyValues = new HashMap<>();
         try {
             Tree tree = RepositoryUtils.getTree(repository, ttree);
@@ -268,6 +267,22 @@ public class JTreeServiceImpl implements JTreeService {
             logger.error(ex.getMessage(), ex);
         }
         return removed;
+    }
+
+    @Override
+    public Map<String, TPropertyState> getProperties(List<String> propertyNames, TTree ttree) throws TException {
+           Map<String,TPropertyState> properties = new HashMap<>();
+        try {
+            Tree tree = RepositoryUtils.getTree(repository, ttree);            
+            tree.getProperties().forEach(propertyState -> {
+                String name = propertyState.getName();
+                TPropertyState tpropertyState = getPropertyValue(propertyState);
+                properties.put(name, tpropertyState);
+            });
+        } catch (LoginException | NoSuchWorkspaceException ex) {
+            logger.error(ex.getMessage(), ex);
+        }
+        return properties;
     }
 
 }

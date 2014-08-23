@@ -6,23 +6,26 @@
         <artifactId>jcr-oak-rpc</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <properties>
+        <jackrabbit.oak.version>1.0.4</jackrabbit.oak.version>
+    </properties>
     <packaging>bundle</packaging>
     <artifactId>jcr-oak-rpc-services</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.apache.jackrabbit</groupId>
             <artifactId>oak-jcr</artifactId>
-            <version>1.0.0</version>
+            <version>${jackrabbit.oak.version}</version>
         </dependency>    
         <dependency>
             <groupId>org.apache.jackrabbit</groupId>
             <artifactId>oak-mk</artifactId>
-            <version>1.0.0</version>
+            <version>${jackrabbit.oak.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.jackrabbit</groupId>
             <artifactId>oak-mk-api</artifactId>
-            <version>1.0.0</version>
+            <version>${jackrabbit.oak.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.jcr</groupId>

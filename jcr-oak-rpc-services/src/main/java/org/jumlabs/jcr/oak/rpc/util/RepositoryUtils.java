@@ -23,8 +23,11 @@ import org.springframework.beans.BeanUtils;
 public class RepositoryUtils {
     
      public static Tree getTree(JRepository repository,String path) throws LoginException, NoSuchWorkspaceException{
-       ContentSession session = repository.logginAdministrative(null);
-       Tree tree = session.getLatestRoot().getTree(path);
+       Tree tree = null;
+       if(path != null){
+        ContentSession session = repository.logginAdministrative(null);
+         tree = session.getLatestRoot().getTree(path);    
+       }       
        return tree;
    }  
     

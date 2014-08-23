@@ -58,13 +58,19 @@ public class JcrOakThritServerTests {
     }
 
     public static void nonBlocking(TProcessor processor) throws TTransportException {
-        TNonblockingServerSocket serverTransport = new TNonblockingServerSocket(SERVER_PORT);
-        THsHaServer server = new THsHaServer(
-                new THsHaServer.Args(serverTransport)
-                .processor(processor)                
-                .protocolFactory(new TBinaryProtocol.Factory(false, false)));       
-        System.out.println("Starting server on port "+SERVER_PORT+" ...");
-        server.serve();
+        try{
+                TNonblockingServerSocket serverTransport = new TNonblockingServerSocket(SERVER_PORT);
+           THsHaServer server = new THsHaServer(
+                   new THsHaServer.Args(serverTransport)
+                   .processor(processor)                
+                   .protocolFactory(new TBinaryProtocol.Factory(false, false)));       
+           System.out.println("Starting server on port "+SERVER_PORT+" ...");
+           server.serve();
+        }
+        catch(Exception e){
+            System.out.println("Error on the server:" + e.getMessage());
+        }
+       
     }
 
 }

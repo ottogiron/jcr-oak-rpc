@@ -34,8 +34,7 @@ public class JRootServiceImpl implements JRootService {
     @Override
     public TTree getTree(String path) throws TException {
         TTree ttree = null;
-        try {
-           
+        try {           
             Tree tree = RepositoryUtils.getTree(repository, path);
             ttree = RepositoryUtils.toTTree(tree);
 
