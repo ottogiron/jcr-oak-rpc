@@ -259,11 +259,12 @@ public class JTreeServiceImpl implements JTreeService {
     public boolean remove(TTree ttree) throws TException {
         boolean removed = false;
         try {
-           
-            Tree tree = RepositoryUtils.getTree(repository, ttree.getPath());
+            Root root = RepositoryUtils.getJCRRoot(repository);
+            Tree tree = root.getTree(ttree.getPath());            
             removed = tree.remove();
+            root.commit();
 
-        } catch (LoginException | NoSuchWorkspaceException | BeansException ex) {
+        } catch (LoginException | NoSuchWorkspaceException |  CommitFailedException ex) {
             logger.error(ex.getMessage(), ex);
         }
         return removed;
