@@ -49,7 +49,7 @@ public class TTreeService {
 
     public Map<String,TPropertyState> getPropertiesByNames(List<String> propertyNames, TTree ttree) throws org.apache.thrift.TException;
 
-    public Map<String,TPropertyState> getProperties(List<String> propertyNames, TTree ttree) throws org.apache.thrift.TException;
+    public Map<String,TPropertyState> getProperties(TTree ttree) throws org.apache.thrift.TException;
 
     public void setPropertiesValue(Map<String,TPropertyState> values, TTree ttree) throws org.apache.thrift.TException;
 
@@ -69,7 +69,7 @@ public class TTreeService {
 
     public void getPropertiesByNames(List<String> propertyNames, TTree ttree, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void getProperties(List<String> propertyNames, TTree ttree, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void getProperties(TTree ttree, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void setPropertiesValue(Map<String,TPropertyState> values, TTree ttree, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -215,16 +215,15 @@ public class TTreeService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getPropertiesByNames failed: unknown result");
     }
 
-    public Map<String,TPropertyState> getProperties(List<String> propertyNames, TTree ttree) throws org.apache.thrift.TException
+    public Map<String,TPropertyState> getProperties(TTree ttree) throws org.apache.thrift.TException
     {
-      send_getProperties(propertyNames, ttree);
+      send_getProperties(ttree);
       return recv_getProperties();
     }
 
-    public void send_getProperties(List<String> propertyNames, TTree ttree) throws org.apache.thrift.TException
+    public void send_getProperties(TTree ttree) throws org.apache.thrift.TException
     {
       getProperties_args args = new getProperties_args();
-      args.setPropertyNames(propertyNames);
       args.setTtree(ttree);
       sendBase("getProperties", args);
     }
@@ -470,26 +469,23 @@ public class TTreeService {
       }
     }
 
-    public void getProperties(List<String> propertyNames, TTree ttree, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void getProperties(TTree ttree, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      getProperties_call method_call = new getProperties_call(propertyNames, ttree, resultHandler, this, ___protocolFactory, ___transport);
+      getProperties_call method_call = new getProperties_call(ttree, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class getProperties_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private List<String> propertyNames;
       private TTree ttree;
-      public getProperties_call(List<String> propertyNames, TTree ttree, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public getProperties_call(TTree ttree, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.propertyNames = propertyNames;
         this.ttree = ttree;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getProperties", org.apache.thrift.protocol.TMessageType.CALL, 0));
         getProperties_args args = new getProperties_args();
-        args.setPropertyNames(propertyNames);
         args.setTtree(ttree);
         args.write(prot);
         prot.writeMessageEnd();
@@ -711,7 +707,7 @@ public class TTreeService {
 
       public getProperties_result getResult(I iface, getProperties_args args) throws org.apache.thrift.TException {
         getProperties_result result = new getProperties_result();
-        result.success = iface.getProperties(args.propertyNames, args.ttree);
+        result.success = iface.getProperties(args.ttree);
         return result;
       }
     }
@@ -1083,7 +1079,7 @@ public class TTreeService {
       }
 
       public void start(I iface, getProperties_args args, org.apache.thrift.async.AsyncMethodCallback<Map<String,TPropertyState>> resultHandler) throws TException {
-        iface.getProperties(args.propertyNames, args.ttree,resultHandler);
+        iface.getProperties(args.ttree,resultHandler);
       }
     }
 
@@ -5327,8 +5323,7 @@ public class TTreeService {
   public static class getProperties_args implements org.apache.thrift.TBase<getProperties_args, getProperties_args._Fields>, java.io.Serializable, Cloneable, Comparable<getProperties_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getProperties_args");
 
-    private static final org.apache.thrift.protocol.TField PROPERTY_NAMES_FIELD_DESC = new org.apache.thrift.protocol.TField("propertyNames", org.apache.thrift.protocol.TType.LIST, (short)1);
-    private static final org.apache.thrift.protocol.TField TTREE_FIELD_DESC = new org.apache.thrift.protocol.TField("ttree", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+    private static final org.apache.thrift.protocol.TField TTREE_FIELD_DESC = new org.apache.thrift.protocol.TField("ttree", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -5336,13 +5331,11 @@ public class TTreeService {
       schemes.put(TupleScheme.class, new getProperties_argsTupleSchemeFactory());
     }
 
-    public List<String> propertyNames; // required
     public TTree ttree; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      PROPERTY_NAMES((short)1, "propertyNames"),
-      TTREE((short)2, "ttree");
+      TTREE((short)1, "ttree");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -5357,9 +5350,7 @@ public class TTreeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // PROPERTY_NAMES
-            return PROPERTY_NAMES;
-          case 2: // TTREE
+          case 1: // TTREE
             return TTREE;
           default:
             return null;
@@ -5404,9 +5395,6 @@ public class TTreeService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.PROPERTY_NAMES, new org.apache.thrift.meta_data.FieldMetaData("propertyNames", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
       tmpMap.put(_Fields.TTREE, new org.apache.thrift.meta_data.FieldMetaData("ttree", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TTree.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -5417,11 +5405,9 @@ public class TTreeService {
     }
 
     public getProperties_args(
-      List<String> propertyNames,
       TTree ttree)
     {
       this();
-      this.propertyNames = propertyNames;
       this.ttree = ttree;
     }
 
@@ -5429,10 +5415,6 @@ public class TTreeService {
      * Performs a deep copy on <i>other</i>.
      */
     public getProperties_args(getProperties_args other) {
-      if (other.isSetPropertyNames()) {
-        List<String> __this__propertyNames = new ArrayList<String>(other.propertyNames);
-        this.propertyNames = __this__propertyNames;
-      }
       if (other.isSetTtree()) {
         this.ttree = new TTree(other.ttree);
       }
@@ -5444,47 +5426,7 @@ public class TTreeService {
 
     @Override
     public void clear() {
-      this.propertyNames = null;
       this.ttree = null;
-    }
-
-    public int getPropertyNamesSize() {
-      return (this.propertyNames == null) ? 0 : this.propertyNames.size();
-    }
-
-    public java.util.Iterator<String> getPropertyNamesIterator() {
-      return (this.propertyNames == null) ? null : this.propertyNames.iterator();
-    }
-
-    public void addToPropertyNames(String elem) {
-      if (this.propertyNames == null) {
-        this.propertyNames = new ArrayList<String>();
-      }
-      this.propertyNames.add(elem);
-    }
-
-    public List<String> getPropertyNames() {
-      return this.propertyNames;
-    }
-
-    public getProperties_args setPropertyNames(List<String> propertyNames) {
-      this.propertyNames = propertyNames;
-      return this;
-    }
-
-    public void unsetPropertyNames() {
-      this.propertyNames = null;
-    }
-
-    /** Returns true if field propertyNames is set (has been assigned a value) and false otherwise */
-    public boolean isSetPropertyNames() {
-      return this.propertyNames != null;
-    }
-
-    public void setPropertyNamesIsSet(boolean value) {
-      if (!value) {
-        this.propertyNames = null;
-      }
     }
 
     public TTree getTtree() {
@@ -5513,14 +5455,6 @@ public class TTreeService {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case PROPERTY_NAMES:
-        if (value == null) {
-          unsetPropertyNames();
-        } else {
-          setPropertyNames((List<String>)value);
-        }
-        break;
-
       case TTREE:
         if (value == null) {
           unsetTtree();
@@ -5534,9 +5468,6 @@ public class TTreeService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case PROPERTY_NAMES:
-        return getPropertyNames();
-
       case TTREE:
         return getTtree();
 
@@ -5551,8 +5482,6 @@ public class TTreeService {
       }
 
       switch (field) {
-      case PROPERTY_NAMES:
-        return isSetPropertyNames();
       case TTREE:
         return isSetTtree();
       }
@@ -5572,15 +5501,6 @@ public class TTreeService {
       if (that == null)
         return false;
 
-      boolean this_present_propertyNames = true && this.isSetPropertyNames();
-      boolean that_present_propertyNames = true && that.isSetPropertyNames();
-      if (this_present_propertyNames || that_present_propertyNames) {
-        if (!(this_present_propertyNames && that_present_propertyNames))
-          return false;
-        if (!this.propertyNames.equals(that.propertyNames))
-          return false;
-      }
-
       boolean this_present_ttree = true && this.isSetTtree();
       boolean that_present_ttree = true && that.isSetTtree();
       if (this_present_ttree || that_present_ttree) {
@@ -5596,11 +5516,6 @@ public class TTreeService {
     @Override
     public int hashCode() {
       List<Object> list = new ArrayList<Object>();
-
-      boolean present_propertyNames = true && (isSetPropertyNames());
-      list.add(present_propertyNames);
-      if (present_propertyNames)
-        list.add(propertyNames);
 
       boolean present_ttree = true && (isSetTtree());
       list.add(present_ttree);
@@ -5618,16 +5533,6 @@ public class TTreeService {
 
       int lastComparison = 0;
 
-      lastComparison = Boolean.valueOf(isSetPropertyNames()).compareTo(other.isSetPropertyNames());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetPropertyNames()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.propertyNames, other.propertyNames);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
       lastComparison = Boolean.valueOf(isSetTtree()).compareTo(other.isSetTtree());
       if (lastComparison != 0) {
         return lastComparison;
@@ -5658,14 +5563,6 @@ public class TTreeService {
       StringBuilder sb = new StringBuilder("getProperties_args(");
       boolean first = true;
 
-      sb.append("propertyNames:");
-      if (this.propertyNames == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.propertyNames);
-      }
-      first = false;
-      if (!first) sb.append(", ");
       sb.append("ttree:");
       if (this.ttree == null) {
         sb.append("null");
@@ -5719,25 +5616,7 @@ public class TTreeService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // PROPERTY_NAMES
-              if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
-                {
-                  org.apache.thrift.protocol.TList _list74 = iprot.readListBegin();
-                  struct.propertyNames = new ArrayList<String>(_list74.size);
-                  String _elem75;
-                  for (int _i76 = 0; _i76 < _list74.size; ++_i76)
-                  {
-                    _elem75 = iprot.readString();
-                    struct.propertyNames.add(_elem75);
-                  }
-                  iprot.readListEnd();
-                }
-                struct.setPropertyNamesIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            case 2: // TTREE
+            case 1: // TTREE
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.ttree = new TTree();
                 struct.ttree.read(iprot);
@@ -5761,18 +5640,6 @@ public class TTreeService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.propertyNames != null) {
-          oprot.writeFieldBegin(PROPERTY_NAMES_FIELD_DESC);
-          {
-            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.propertyNames.size()));
-            for (String _iter77 : struct.propertyNames)
-            {
-              oprot.writeString(_iter77);
-            }
-            oprot.writeListEnd();
-          }
-          oprot.writeFieldEnd();
-        }
         if (struct.ttree != null) {
           oprot.writeFieldBegin(TTREE_FIELD_DESC);
           struct.ttree.write(oprot);
@@ -5796,22 +5663,10 @@ public class TTreeService {
       public void write(org.apache.thrift.protocol.TProtocol prot, getProperties_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetPropertyNames()) {
+        if (struct.isSetTtree()) {
           optionals.set(0);
         }
-        if (struct.isSetTtree()) {
-          optionals.set(1);
-        }
-        oprot.writeBitSet(optionals, 2);
-        if (struct.isSetPropertyNames()) {
-          {
-            oprot.writeI32(struct.propertyNames.size());
-            for (String _iter78 : struct.propertyNames)
-            {
-              oprot.writeString(_iter78);
-            }
-          }
-        }
+        oprot.writeBitSet(optionals, 1);
         if (struct.isSetTtree()) {
           struct.ttree.write(oprot);
         }
@@ -5820,21 +5675,8 @@ public class TTreeService {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, getProperties_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(2);
+        BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          {
-            org.apache.thrift.protocol.TList _list79 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.propertyNames = new ArrayList<String>(_list79.size);
-            String _elem80;
-            for (int _i81 = 0; _i81 < _list79.size; ++_i81)
-            {
-              _elem80 = iprot.readString();
-              struct.propertyNames.add(_elem80);
-            }
-          }
-          struct.setPropertyNamesIsSet(true);
-        }
-        if (incoming.get(1)) {
           struct.ttree = new TTree();
           struct.ttree.read(iprot);
           struct.setTtreeIsSet(true);
@@ -6165,16 +6007,16 @@ public class TTreeService {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map82 = iprot.readMapBegin();
-                  struct.success = new HashMap<String,TPropertyState>(2*_map82.size);
-                  String _key83;
-                  TPropertyState _val84;
-                  for (int _i85 = 0; _i85 < _map82.size; ++_i85)
+                  org.apache.thrift.protocol.TMap _map74 = iprot.readMapBegin();
+                  struct.success = new HashMap<String,TPropertyState>(2*_map74.size);
+                  String _key75;
+                  TPropertyState _val76;
+                  for (int _i77 = 0; _i77 < _map74.size; ++_i77)
                   {
-                    _key83 = iprot.readString();
-                    _val84 = new TPropertyState();
-                    _val84.read(iprot);
-                    struct.success.put(_key83, _val84);
+                    _key75 = iprot.readString();
+                    _val76 = new TPropertyState();
+                    _val76.read(iprot);
+                    struct.success.put(_key75, _val76);
                   }
                   iprot.readMapEnd();
                 }
@@ -6202,10 +6044,10 @@ public class TTreeService {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (Map.Entry<String, TPropertyState> _iter86 : struct.success.entrySet())
+            for (Map.Entry<String, TPropertyState> _iter78 : struct.success.entrySet())
             {
-              oprot.writeString(_iter86.getKey());
-              _iter86.getValue().write(oprot);
+              oprot.writeString(_iter78.getKey());
+              _iter78.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -6236,10 +6078,10 @@ public class TTreeService {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (Map.Entry<String, TPropertyState> _iter87 : struct.success.entrySet())
+            for (Map.Entry<String, TPropertyState> _iter79 : struct.success.entrySet())
             {
-              oprot.writeString(_iter87.getKey());
-              _iter87.getValue().write(oprot);
+              oprot.writeString(_iter79.getKey());
+              _iter79.getValue().write(oprot);
             }
           }
         }
@@ -6251,16 +6093,16 @@ public class TTreeService {
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map88 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new HashMap<String,TPropertyState>(2*_map88.size);
-            String _key89;
-            TPropertyState _val90;
-            for (int _i91 = 0; _i91 < _map88.size; ++_i91)
+            org.apache.thrift.protocol.TMap _map80 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new HashMap<String,TPropertyState>(2*_map80.size);
+            String _key81;
+            TPropertyState _val82;
+            for (int _i83 = 0; _i83 < _map80.size; ++_i83)
             {
-              _key89 = iprot.readString();
-              _val90 = new TPropertyState();
-              _val90.read(iprot);
-              struct.success.put(_key89, _val90);
+              _key81 = iprot.readString();
+              _val82 = new TPropertyState();
+              _val82.read(iprot);
+              struct.success.put(_key81, _val82);
             }
           }
           struct.setSuccessIsSet(true);
@@ -6676,16 +6518,16 @@ public class TTreeService {
             case 1: // VALUES
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map92 = iprot.readMapBegin();
-                  struct.values = new HashMap<String,TPropertyState>(2*_map92.size);
-                  String _key93;
-                  TPropertyState _val94;
-                  for (int _i95 = 0; _i95 < _map92.size; ++_i95)
+                  org.apache.thrift.protocol.TMap _map84 = iprot.readMapBegin();
+                  struct.values = new HashMap<String,TPropertyState>(2*_map84.size);
+                  String _key85;
+                  TPropertyState _val86;
+                  for (int _i87 = 0; _i87 < _map84.size; ++_i87)
                   {
-                    _key93 = iprot.readString();
-                    _val94 = new TPropertyState();
-                    _val94.read(iprot);
-                    struct.values.put(_key93, _val94);
+                    _key85 = iprot.readString();
+                    _val86 = new TPropertyState();
+                    _val86.read(iprot);
+                    struct.values.put(_key85, _val86);
                   }
                   iprot.readMapEnd();
                 }
@@ -6722,10 +6564,10 @@ public class TTreeService {
           oprot.writeFieldBegin(VALUES_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.values.size()));
-            for (Map.Entry<String, TPropertyState> _iter96 : struct.values.entrySet())
+            for (Map.Entry<String, TPropertyState> _iter88 : struct.values.entrySet())
             {
-              oprot.writeString(_iter96.getKey());
-              _iter96.getValue().write(oprot);
+              oprot.writeString(_iter88.getKey());
+              _iter88.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -6764,10 +6606,10 @@ public class TTreeService {
         if (struct.isSetValues()) {
           {
             oprot.writeI32(struct.values.size());
-            for (Map.Entry<String, TPropertyState> _iter97 : struct.values.entrySet())
+            for (Map.Entry<String, TPropertyState> _iter89 : struct.values.entrySet())
             {
-              oprot.writeString(_iter97.getKey());
-              _iter97.getValue().write(oprot);
+              oprot.writeString(_iter89.getKey());
+              _iter89.getValue().write(oprot);
             }
           }
         }
@@ -6782,16 +6624,16 @@ public class TTreeService {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map98 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.values = new HashMap<String,TPropertyState>(2*_map98.size);
-            String _key99;
-            TPropertyState _val100;
-            for (int _i101 = 0; _i101 < _map98.size; ++_i101)
+            org.apache.thrift.protocol.TMap _map90 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.values = new HashMap<String,TPropertyState>(2*_map90.size);
+            String _key91;
+            TPropertyState _val92;
+            for (int _i93 = 0; _i93 < _map90.size; ++_i93)
             {
-              _key99 = iprot.readString();
-              _val100 = new TPropertyState();
-              _val100.read(iprot);
-              struct.values.put(_key99, _val100);
+              _key91 = iprot.readString();
+              _val92 = new TPropertyState();
+              _val92.read(iprot);
+              struct.values.put(_key91, _val92);
             }
           }
           struct.setValuesIsSet(true);

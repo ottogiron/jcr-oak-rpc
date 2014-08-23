@@ -270,7 +270,7 @@ public class JTreeServiceImpl implements JTreeService {
     }
 
     @Override
-    public Map<String, TPropertyState> getProperties(List<String> propertyNames, TTree ttree) throws TException {
+    public Map<String, TPropertyState> getProperties(TTree ttree) throws TException {
            Map<String,TPropertyState> properties = new HashMap<>();
         try {
             Tree tree = RepositoryUtils.getTree(repository, ttree);            
