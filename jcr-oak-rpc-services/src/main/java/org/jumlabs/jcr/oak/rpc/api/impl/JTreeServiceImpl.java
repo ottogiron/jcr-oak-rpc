@@ -30,6 +30,7 @@ import org.jumlabs.jcr.oak.rpc.api.TType;
 import org.jumlabs.jcr.oak.rpc.util.RepositoryUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -42,6 +43,7 @@ public class JTreeServiceImpl implements JTreeService {
     
     @Autowired
     private JRepository repository;
+    
 
     @Override
     public TTree addChild(String name, TTree ttree) throws TException {
@@ -251,6 +253,20 @@ public class JTreeServiceImpl implements JTreeService {
         tpropertyState.setName(propertyState.getName());
         tpropertyState.setType(ttype);
         return tpropertyState;
+    }
+
+    @Override
+    public boolean remove(TTree ttree) throws TException {
+        boolean removed = false;
+        try {
+           
+            Tree tree = RepositoryUtils.getTree(repository, ttree.getPath());
+            removed = tree.remove();
+
+        } catch (LoginException | NoSuchWorkspaceException | BeansException ex) {
+            logger.error(ex.getMessage(), ex);
+        }
+        return removed;
     }
 
 }
