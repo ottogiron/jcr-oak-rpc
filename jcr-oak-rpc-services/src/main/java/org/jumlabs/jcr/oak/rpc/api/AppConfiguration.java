@@ -94,11 +94,7 @@ public class AppConfiguration {
         return service;
     }
     
-    @Bean(name = "testService")
-    public TestService testService(){
-        return new TestServiceImpl();
-    }
-    
+
 
    @Bean 
    public TRootService.Processor rootProcessor(){
