@@ -249,6 +249,15 @@ public class JTreeServiceImpl implements JTreeService {
             ttype = TType.LONGS;
             tpropertyState.setLongValue(propertyState.getValue(Type.LONG));
         }
+        else if(type.equals(Type.STRING)||type.equals(Type.NAME)){
+            ttype = TType.STRING;
+            tpropertyState.setStringValue(propertyState.getValue(Type.STRING));
+        }
+        else if(type.equals(Type.STRINGS)||type.equals(Type.NAMES)){
+            ttype = TType.STRINGS;
+            List<String> stringValues = Lists.newArrayList(propertyState.getValue(Type.STRINGS));
+            tpropertyState.setStringValues(stringValues);
+        }
         tpropertyState.setName(propertyState.getName());
         tpropertyState.setType(ttype);
         return tpropertyState;
