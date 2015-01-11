@@ -5,29 +5,23 @@
         <groupId>org.jumlabs</groupId>
         <artifactId>jcr-oak-rpc</artifactId>
         <version>1.0-SNAPSHOT</version>
-    </parent>
-    <properties>
-        <spring.boot.version>1.1.9.RELEASE</spring.boot.version>
-    </properties>
+    </parent>    
     <artifactId>jcr-oak-rpc-server</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-parent</artifactId>
-            <version>${spring.boot.version}</version>            
+            <artifactId>spring-boot-starter-parent</artifactId>                       
             <type>pom</type>
         </dependency>
         
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <version>${spring.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring.boot.version}</version>
+            <artifactId>spring-boot-starter-test</artifactId>            
             <scope>test</scope>
         </dependency>
         <dependency>

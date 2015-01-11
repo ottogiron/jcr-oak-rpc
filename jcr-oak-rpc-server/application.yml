@@ -1,0 +1,5 @@
+connection: 
+    mongoHost: localhost
+    mongoDB: MongoJCRSmartAdmin
+    oakUser: admin
+    oakPassword: admin

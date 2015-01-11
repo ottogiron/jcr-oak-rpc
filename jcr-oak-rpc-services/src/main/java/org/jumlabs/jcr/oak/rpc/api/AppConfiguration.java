@@ -27,6 +27,8 @@ import org.jumlabs.jcr.oak.rpc.api.impl.RepositoryImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.JRootServiceImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.JTreeServiceImpl;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,12 +37,17 @@ import org.springframework.context.annotation.Configuration;
  * @author otto
  */
 @Configuration
+@EnableConfigurationProperties(ConnectionSettings.class)
 public class AppConfiguration {
     private  static final Logger logger = LoggerFactory.getLogger(AppConfiguration.class);
     private NodeStore nodeStore;
+    
+    @Autowired
+    ConnectionSettings connectionSettings;
+    
     @Bean 
     public MongoConnection mongoConnection(){
-        MongoClientURI uri = new MongoClientURI("mongodb://localhost/MongoJCRSmartAdmin");
+       MongoClientURI uri = new MongoClientURI("mongodb://"+connectionSettings.getMongoHost()+"/"+connectionSettings.getMongoDB());
         MongoConnection mongo = null;
         try {
             mongo = new MongoConnection(uri.getURI());
@@ -71,7 +78,7 @@ public class AppConfiguration {
     
     @Bean
     public Credentials adminCredentials(){
-        return new SimpleCredentials("admin", "admin".toCharArray());
+        return new SimpleCredentials(connectionSettings.getOakUser(), connectionSettings.getOakPassword().toCharArray());
     }
     
     @Bean

@@ -15,6 +15,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <skip.deployment>false</skip.deployment>
         <spring.version>4.1.3.RELEASE</spring.version>
+        <spring.boot.version>1.1.9.RELEASE</spring.boot.version>
     </properties>
     <dependencyManagement>
         <dependencies>      
@@ -46,6 +47,24 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>17.0</version>
+            </dependency>
+            <!--Spring boot-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>                       
+                <type>pom</type>
+            </dependency>
+        
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>            
+                <version>${spring.boot.version}</version>
+                <scope>test</scope>
             </dependency>            
       
         </dependencies>
