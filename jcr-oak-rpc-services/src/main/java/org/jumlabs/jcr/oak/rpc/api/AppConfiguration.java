@@ -40,7 +40,7 @@ public class AppConfiguration {
     private NodeStore nodeStore;
     @Bean 
     public MongoConnection mongoConnection(){
-        MongoClientURI uri = new MongoClientURI("mongodb://localhost/MongoMKDB");
+        MongoClientURI uri = new MongoClientURI("mongodb://localhost/MongoJCRSmartAdmin");
         MongoConnection mongo = null;
         try {
             mongo = new MongoConnection(uri.getURI());
