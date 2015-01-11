@@ -9,9 +9,11 @@ package org.jumlabs.jcr.oak.rpc.api;
 import com.mongodb.MongoClientURI;
 import java.net.UnknownHostException;
 import javax.jcr.Credentials;
+import javax.jcr.Repository;
 import javax.jcr.SimpleCredentials;
 import org.apache.jackrabbit.oak.Oak;
 import org.apache.jackrabbit.oak.api.ContentRepository;
+import org.apache.jackrabbit.oak.jcr.Jcr;
 import org.apache.jackrabbit.oak.plugins.document.DocumentMK;
 import org.slf4j.Logger;
 import org.apache.jackrabbit.oak.plugins.document.util.MongoConnection;
@@ -35,7 +37,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfiguration {
     private  static final Logger logger = LoggerFactory.getLogger(AppConfiguration.class);
-    
+    private NodeStore nodeStore;
     @Bean 
     public MongoConnection mongoConnection(){
         MongoClientURI uri = new MongoClientURI("mongodb://localhost/MongoMKDB");
@@ -48,14 +50,22 @@ public class AppConfiguration {
         return mongo;
     }
     
+    @Bean
+    public Repository  jcrRepository(){
+        Repository repository = new Jcr(nodeStore())
+                                .createRepository();
+        return repository;
+    }
+    
     
     @Bean
     public NodeStore nodeStore(){
-        NodeStore store;
-        store = new DocumentMK.Builder().
+        
+        if(nodeStore == null)
+        nodeStore = new DocumentMK.Builder().
                  setMongoDB(mongoConnection().getDB())
                  .getNodeStore();  
-        return store;
+        return nodeStore;
     }
     
     
