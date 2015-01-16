@@ -67,11 +67,11 @@ public class AppConfiguration {
     
     @Bean
     public NodeStore nodeStore(){
-        
-        if(nodeStore == null)
-        nodeStore = new DocumentMK.Builder().
+        if(nodeStore == null){
+            nodeStore = new DocumentMK.Builder().
                  setMongoDB(mongoConnection().getDB())
-                 .getNodeStore();  
+                 .getNodeStore(); 
+        }         
         return nodeStore;
     }
     

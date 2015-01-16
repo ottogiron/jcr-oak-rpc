@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "connection")
 public class ConnectionSettings {
-    private String mongoHost;
-    private String mongoDB;
-    private String oakUser;
-    private String oakPassword;
+    private String mongoHost = "localhost";
+    private String mongoDB = "MongoJCRSmartAdminTests";
+    private String oakUser = "admin";
+    private String oakPassword = "admin";
 
     public String getMongoHost() {
         return mongoHost;

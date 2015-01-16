@@ -7,6 +7,8 @@
 package org.jumlabs.jcr.oak.rpc.api;
 
 import javax.jcr.NoSuchWorkspaceException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.security.auth.login.LoginException;
 import org.apache.jackrabbit.oak.api.ContentSession;
 
@@ -16,6 +18,7 @@ import org.apache.jackrabbit.oak.api.ContentSession;
  */
 public interface JRepository {
 
-    ContentSession logginAdministrative(String workspaceName) throws LoginException, NoSuchWorkspaceException;
+    ContentSession loginAdministrative(String workspaceName) throws LoginException, NoSuchWorkspaceException;
+    Session jcrLoginAdministrative() throws RepositoryException;
     
 }

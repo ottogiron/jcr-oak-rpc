@@ -49,7 +49,7 @@ public class JRootServiceImpl implements JRootService {
     public boolean move(String sourcePath, String destPath) throws TException {
         boolean move = false;
         try {
-            ContentSession session = repository.logginAdministrative(null);
+            ContentSession session = repository.loginAdministrative(null);
             move = session.getLatestRoot().move(sourcePath, destPath);
         } catch (LoginException | NoSuchWorkspaceException ex) {
             logger.error(ex.getMessage(), ex);

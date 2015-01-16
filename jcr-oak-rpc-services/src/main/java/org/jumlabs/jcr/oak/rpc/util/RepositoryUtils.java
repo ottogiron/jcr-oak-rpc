@@ -25,7 +25,7 @@ public class RepositoryUtils {
      public static Tree getTree(JRepository repository,String path) throws LoginException, NoSuchWorkspaceException{
        Tree tree = null;
        if(path != null){
-        ContentSession session = repository.logginAdministrative(null);
+        ContentSession session = repository.loginAdministrative(null);
          tree = session.getLatestRoot().getTree(path);    
        }       
        return tree;
@@ -37,7 +37,7 @@ public class RepositoryUtils {
    } 
    
    public static Root getJCRRoot(JRepository repository) throws LoginException, NoSuchWorkspaceException{
-       ContentSession session = repository.logginAdministrative(null);
+       ContentSession session = repository.loginAdministrative(null);
        return session.getLatestRoot();
    }
    
