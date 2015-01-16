@@ -6,6 +6,7 @@
 
 package org.jumlabs.jcr.oak.rpc.api;
 
+import org.jumlabs.jcr.oak.rpc.api.thrift.TTree;
 import javax.jcr.NoSuchWorkspaceException;
 import javax.security.auth.login.LoginException;
 import org.apache.jackrabbit.oak.api.ContentRepository;

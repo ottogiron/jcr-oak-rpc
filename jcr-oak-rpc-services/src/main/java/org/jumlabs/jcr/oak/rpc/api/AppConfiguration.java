@@ -6,6 +6,8 @@
 
 package org.jumlabs.jcr.oak.rpc.api;
 
+import org.jumlabs.jcr.oak.rpc.api.thrift.TTreeService;
+import org.jumlabs.jcr.oak.rpc.api.thrift.TRootService;
 import com.mongodb.MongoClientURI;
 import java.net.UnknownHostException;
 import javax.jcr.Credentials;

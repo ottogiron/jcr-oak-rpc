@@ -6,6 +6,8 @@
 
 package org.jumlabs.jcr.oak.rpc.api;
 
+import org.jumlabs.jcr.oak.rpc.api.thrift.TRootService;
+
 /**
  *
  * @author otto

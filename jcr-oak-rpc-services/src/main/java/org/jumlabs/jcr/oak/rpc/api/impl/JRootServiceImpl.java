@@ -13,7 +13,7 @@ import org.apache.jackrabbit.oak.api.Tree;
 import org.apache.thrift.TException;
 import org.jumlabs.jcr.oak.rpc.api.JRepository;
 import org.jumlabs.jcr.oak.rpc.api.JRootService;
-import org.jumlabs.jcr.oak.rpc.api.TTree;
+import org.jumlabs.jcr.oak.rpc.api.thrift.TTree;
 import org.jumlabs.jcr.oak.rpc.util.RepositoryUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

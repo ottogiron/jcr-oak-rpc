@@ -1,6 +1,6 @@
-namespace java org.jumlabs.jcr.oak.rpc.api
+namespace java org.jumlabs.jcr.oak.rpc.api.thrift
 
-struct Value {
+struct TValue {
     1:binary binaryValue,
     2:string stringValue,
     3:bool boolValue,
@@ -9,8 +9,8 @@ struct Value {
     6:i32 type, 
 }
 
-struct PropertyDefinition {
-    1:list<Value> defaultValues,
+struct TPropertyDefinition {
+    1:list<TValue> defaultValues,
     2:i32 requiredType,
     3:string name,
     4:bool isMultiple,
@@ -18,29 +18,29 @@ struct PropertyDefinition {
     6:bool isFullTextSercheable
 }
 
-struct NodeDefinition {
+struct TNodeDefinition {
     1:string defaultPrimaryType,
     2:list<string> requiredPrimaryTypes,   
 }
 
-struct NodeType {
+struct TNodeType {
     1:string name,
-    2:list<PropertyDefinition> propertyDefinitions,
-    3:list<NodeDefinition> childNodeDefinitions
+    2:list<TPropertyDefinition> propertyDefinitions,
+    3:list<TNodeDefinition> childNodeDefinitions
     
 }
 
-service NodeTypeService {
-    bool canAddChildNodeWithName(1:NodeType nodeType, 2:string childNodeName),
-    bool canAddChildNodeWithType(1:NodeType nodeType, 2:string childNodeName, 3:string nodeTypeName),
-    bool canRemoveNode(1:NodeType nodeType, 2:string nodeName),
-    bool isNodeType(1:NodeType nodeType, 2:string nodeTypeName),
+service TNodeTypeService {
+    bool canAddChildNodeWithName(1:TNodeType nodeType, 2:string childNodeName),
+    bool canAddChildNodeWithType(1:TNodeType nodeType, 2:string childNodeName, 3:string nodeTypeName),
+    bool canRemoveNode(1:TNodeType nodeType, 2:string nodeName),
+    bool isNodeType(1:TNodeType nodeType, 2:string nodeTypeName),
     
 }
 
 service TNodeTypeManager {
     list<string> getAllNodeTypes(),
-    NodeType getNodeType(1:string nodeTypeName),
+    TNodeType getNodeType(1:string nodeTypeName),
     list<string> getPrimaryNodeTypes(),
     bool hasNodeType(1:string name),
 }

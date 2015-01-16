@@ -1,4 +1,4 @@
-namespace java org.jumlabs.jcr.oak.rpc.api
+namespace java org.jumlabs.jcr.oak.rpc.api.thrift
 
 
 enum TType{

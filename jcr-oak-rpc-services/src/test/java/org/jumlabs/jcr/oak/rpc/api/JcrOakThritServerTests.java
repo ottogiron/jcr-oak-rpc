@@ -1,5 +1,7 @@
 package org.jumlabs.jcr.oak.rpc.api;
 
+import org.jumlabs.jcr.oak.rpc.api.thrift.TRootService;
+import org.jumlabs.jcr.oak.rpc.api.thrift.TTreeService;
 import org.apache.thrift.TMultiplexedProcessor;
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;
