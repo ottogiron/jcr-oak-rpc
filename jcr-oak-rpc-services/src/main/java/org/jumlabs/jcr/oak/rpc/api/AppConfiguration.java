@@ -30,6 +30,7 @@ import org.jumlabs.jcr.oak.rpc.api.impl.JNodeTypeManagerImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.RepositoryImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.JRootServiceImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.JTreeServiceImpl;
+import org.jumlabs.jcr.oak.rpc.api.thrift.TNodeTypeManager;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -132,6 +133,12 @@ public class AppConfiguration {
    @Bean 
    public TTreeService.Processor treeProcessor(){
        TTreeService.Processor processor = new TTreeService.Processor<>(treeService());
+       return processor;
+   }
+   
+   @Bean
+   public TNodeTypeManager.Processor nodeTypeManagerProcessor(){
+       TNodeTypeManager.Processor processor = new TNodeTypeManager.Processor<>(nodeTypeManager());
        return processor;
    }
 }

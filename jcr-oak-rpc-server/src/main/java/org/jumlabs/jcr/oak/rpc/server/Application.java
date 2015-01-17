@@ -14,6 +14,7 @@ import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 import org.apache.thrift.transport.TTransportException;
+import org.jumlabs.jcr.oak.rpc.api.thrift.TNodeTypeManager;
 import org.jumlabs.jcr.oak.rpc.api.thrift.TRootService;
 import org.jumlabs.jcr.oak.rpc.api.thrift.TTreeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,10 @@ import org.springframework.context.annotation.Configuration;
 public class Application implements CommandLineRunner{
     @Autowired
     private TRootService.Processor rootProcessor;
-    
     @Autowired
     private TTreeService.Processor treeProcessor;
+    @Autowired
+    private TNodeTypeManager.Processor nodeTypeManagerProcessor;
     private static int SERVER_PORT = 9090;
     public static void main(String[] args) {
          SpringApplication.run(Application.class, args);
@@ -72,6 +74,7 @@ public class Application implements CommandLineRunner{
         TMultiplexedProcessor processor = new TMultiplexedProcessor();        
         processor.registerProcessor("TRootService", rootProcessor);
         processor.registerProcessor("TTreeService", treeProcessor);
+        processor.registerProcessor("TNodeTypeManager", nodeTypeManagerProcessor);
         nonBlocking(processor);
     }
     
