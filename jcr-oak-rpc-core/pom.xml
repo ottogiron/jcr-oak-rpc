@@ -11,7 +11,8 @@
         <mongo.driver.version>2.12.2</mongo.driver.version>
     </properties>
     <packaging>jar</packaging>
-    <artifactId>jcr-oak-rpc-services</artifactId>
+    <artifactId>jcr-oak-rpc-core</artifactId>
+    <name>jcr-oak-rpc-core</name>
     <dependencies>
         <dependency>
             <groupId>org.apache.jackrabbit</groupId>
@@ -63,5 +64,5 @@
         <plugins>      
         </plugins>        
     </build>
-    <name>jcr-oak-rpc-core</name>
+    
 </project>

@@ -15,11 +15,11 @@
 
 ### Installation
 * Clone the repository, **git clone git@github.com:ottogiron/jcr-oak-rpc.git**
-* CD to jcr-oak-rpc and run **mvc clean install**
+* CD to jcr-oak-rpc and run **mvn clean install**
 
 ### Running RPC Service
 The service on port 9090 by default.
-Go  into the ***jcr-oak-rpc/jcr-oak-rpc-server*** folder an run  **mvn spring-boot:run** that will start the thrift server.
+Go  into the ***jcr-oak-rpc/jcr-oak-rpc-proxy-server*** folder an run  **mvn spring-boot:run** that will start the thrift server.
 
 ### Example of client for NodeJS
 

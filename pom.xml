@@ -6,8 +6,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>jcr-oak-rpc-server</module>
-        <module>jcr-oak-rpc-services</module>
+        <module>jcr-oak-rpc-proxy-server</module>
+        <module>jcr-oak-rpc-core</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
