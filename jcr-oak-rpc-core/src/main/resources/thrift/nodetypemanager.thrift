@@ -1,4 +1,5 @@
-namespace java org.jumlabs.jcr.oak.rpc.thrift
+namespace java org.jumlabs.jcr.oak.rpc.thrift.nodetype
+namespace js NodeType
 
 struct TValue {
     1:binary binaryValue,

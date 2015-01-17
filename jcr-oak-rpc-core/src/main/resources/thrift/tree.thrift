@@ -1,5 +1,5 @@
-namespace java org.jumlabs.jcr.oak.rpc.api.thrift
-
+namespace java org.jumlabs.jcr.oak.rpc.thrift.api
+namespace js API
 
 enum TType{
   BINARIES, BINARY, BOOLEAN, BOOLEANS, DATE, DATES, 

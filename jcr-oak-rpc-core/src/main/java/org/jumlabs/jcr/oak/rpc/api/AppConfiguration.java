@@ -7,8 +7,8 @@
 package org.jumlabs.jcr.oak.rpc.api;
 
 import org.jumlabs.jcr.oak.rpc.nodetype.JNodeTypeManager;
-import org.jumlabs.jcr.oak.rpc.thrift.TTreeService;
-import org.jumlabs.jcr.oak.rpc.thrift.TRootService;
+import org.jumlabs.jcr.oak.rpc.thrift.api.TTreeService;
+import org.jumlabs.jcr.oak.rpc.thrift.api.TRootService;
 import com.mongodb.MongoClientURI;
 import java.net.UnknownHostException;
 import javax.jcr.Credentials;
@@ -31,7 +31,7 @@ import org.jumlabs.jcr.oak.rpc.nodetype.impl.JNodeTypeManagerImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.RepositoryImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.JRootServiceImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.JTreeServiceImpl;
-import org.jumlabs.jcr.oak.rpc.thrift.TNodeTypeManager;
+import org.jumlabs.jcr.oak.rpc.thrift.nodetype.TNodeTypeManager;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

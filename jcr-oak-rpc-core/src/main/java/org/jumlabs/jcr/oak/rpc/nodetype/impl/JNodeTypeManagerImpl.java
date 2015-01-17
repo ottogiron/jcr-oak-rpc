@@ -16,11 +16,11 @@ import javax.jcr.nodetype.PropertyDefinition;
 import org.apache.thrift.TException;
 import org.jumlabs.jcr.oak.rpc.nodetype.JNodeTypeManager;
 import org.jumlabs.jcr.oak.rpc.api.JRepository;
-import org.jumlabs.jcr.oak.rpc.thrift.TNodeDefinition;
-import org.jumlabs.jcr.oak.rpc.thrift.TNodeType;
-import org.jumlabs.jcr.oak.rpc.thrift.TPropertyDefinition;
-import org.jumlabs.jcr.oak.rpc.thrift.TType;
-import org.jumlabs.jcr.oak.rpc.thrift.TValue;
+import org.jumlabs.jcr.oak.rpc.thrift.nodetype.TNodeDefinition;
+import org.jumlabs.jcr.oak.rpc.thrift.nodetype.TNodeType;
+import org.jumlabs.jcr.oak.rpc.thrift.nodetype.TPropertyDefinition;
+import org.jumlabs.jcr.oak.rpc.thrift.api.TType;
+import org.jumlabs.jcr.oak.rpc.thrift.nodetype.TValue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -6,7 +6,7 @@
 
 package org.jumlabs.jcr.oak.rpc.api;
 
-import org.jumlabs.jcr.oak.rpc.thrift.TRootService;
+import org.jumlabs.jcr.oak.rpc.thrift.api.TRootService;
 
 /**
  *

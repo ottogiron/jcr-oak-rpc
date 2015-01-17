@@ -4,7 +4,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package org.jumlabs.jcr.oak.rpc.thrift;
+package org.jumlabs.jcr.oak.rpc.thrift.api;
 
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
@@ -39,7 +39,7 @@ public class TRootService {
 
   public interface Iface {
 
-    public org.jumlabs.jcr.oak.rpc.thrift.TTree getTree(String path) throws org.apache.thrift.TException;
+    public org.jumlabs.jcr.oak.rpc.thrift.api.TTree getTree(String path) throws org.apache.thrift.TException;
 
     public boolean move(String sourcePath, String destPath) throws org.apache.thrift.TException;
 
@@ -73,7 +73,7 @@ public class TRootService {
       super(iprot, oprot);
     }
 
-    public org.jumlabs.jcr.oak.rpc.thrift.TTree getTree(String path) throws org.apache.thrift.TException
+    public org.jumlabs.jcr.oak.rpc.thrift.api.TTree getTree(String path) throws org.apache.thrift.TException
     {
       send_getTree(path);
       return recv_getTree();
@@ -86,7 +86,7 @@ public class TRootService {
       sendBase("getTree", args);
     }
 
-    public org.jumlabs.jcr.oak.rpc.thrift.TTree recv_getTree() throws org.apache.thrift.TException
+    public org.jumlabs.jcr.oak.rpc.thrift.api.TTree recv_getTree() throws org.apache.thrift.TException
     {
       getTree_result result = new getTree_result();
       receiveBase(result, "getTree");
@@ -160,7 +160,7 @@ public class TRootService {
         prot.writeMessageEnd();
       }
 
-      public org.jumlabs.jcr.oak.rpc.thrift.TTree getResult() throws org.apache.thrift.TException {
+      public org.jumlabs.jcr.oak.rpc.thrift.api.TTree getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
@@ -282,7 +282,7 @@ public class TRootService {
       return processMap;
     }
 
-    public static class getTree<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getTree_args, org.jumlabs.jcr.oak.rpc.thrift.TTree> {
+    public static class getTree<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getTree_args, org.jumlabs.jcr.oak.rpc.thrift.api.TTree> {
       public getTree() {
         super("getTree");
       }
@@ -291,10 +291,10 @@ public class TRootService {
         return new getTree_args();
       }
 
-      public AsyncMethodCallback<org.jumlabs.jcr.oak.rpc.thrift.TTree> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<org.jumlabs.jcr.oak.rpc.thrift.api.TTree> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<org.jumlabs.jcr.oak.rpc.thrift.TTree>() { 
-          public void onComplete(org.jumlabs.jcr.oak.rpc.thrift.TTree o) {
+        return new AsyncMethodCallback<org.jumlabs.jcr.oak.rpc.thrift.api.TTree>() { 
+          public void onComplete(org.jumlabs.jcr.oak.rpc.thrift.api.TTree o) {
             getTree_result result = new getTree_result();
             result.success = o;
             try {
@@ -328,7 +328,7 @@ public class TRootService {
         return false;
       }
 
-      public void start(I iface, getTree_args args, org.apache.thrift.async.AsyncMethodCallback<org.jumlabs.jcr.oak.rpc.thrift.TTree> resultHandler) throws TException {
+      public void start(I iface, getTree_args args, org.apache.thrift.async.AsyncMethodCallback<org.jumlabs.jcr.oak.rpc.thrift.api.TTree> resultHandler) throws TException {
         iface.getTree(args.path,resultHandler);
       }
     }
@@ -759,7 +759,7 @@ public class TRootService {
       schemes.put(TupleScheme.class, new getTree_resultTupleSchemeFactory());
     }
 
-    public org.jumlabs.jcr.oak.rpc.thrift.TTree success; // required
+    public org.jumlabs.jcr.oak.rpc.thrift.api.TTree success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -824,7 +824,7 @@ public class TRootService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, org.jumlabs.jcr.oak.rpc.thrift.TTree.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, org.jumlabs.jcr.oak.rpc.thrift.api.TTree.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getTree_result.class, metaDataMap);
     }
@@ -833,7 +833,7 @@ public class TRootService {
     }
 
     public getTree_result(
-        org.jumlabs.jcr.oak.rpc.thrift.TTree success)
+      org.jumlabs.jcr.oak.rpc.thrift.api.TTree success)
     {
       this();
       this.success = success;
@@ -844,7 +844,7 @@ public class TRootService {
      */
     public getTree_result(getTree_result other) {
       if (other.isSetSuccess()) {
-        this.success = new org.jumlabs.jcr.oak.rpc.thrift.TTree(other.success);
+        this.success = new org.jumlabs.jcr.oak.rpc.thrift.api.TTree(other.success);
       }
     }
 
@@ -857,11 +857,11 @@ public class TRootService {
       this.success = null;
     }
 
-    public org.jumlabs.jcr.oak.rpc.thrift.TTree getSuccess() {
+    public org.jumlabs.jcr.oak.rpc.thrift.api.TTree getSuccess() {
       return this.success;
     }
 
-    public getTree_result setSuccess(org.jumlabs.jcr.oak.rpc.thrift.TTree success) {
+    public getTree_result setSuccess(org.jumlabs.jcr.oak.rpc.thrift.api.TTree success) {
       this.success = success;
       return this;
     }
@@ -887,7 +887,7 @@ public class TRootService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((org.jumlabs.jcr.oak.rpc.thrift.TTree)value);
+          setSuccess((org.jumlabs.jcr.oak.rpc.thrift.api.TTree)value);
         }
         break;
 
@@ -1046,7 +1046,7 @@ public class TRootService {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new org.jumlabs.jcr.oak.rpc.thrift.TTree();
+                struct.success = new org.jumlabs.jcr.oak.rpc.thrift.api.TTree();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -1105,7 +1105,7 @@ public class TRootService {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new org.jumlabs.jcr.oak.rpc.thrift.TTree();
+          struct.success = new org.jumlabs.jcr.oak.rpc.thrift.api.TTree();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
