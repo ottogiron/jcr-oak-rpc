@@ -13,6 +13,7 @@ import java.net.UnknownHostException;
 import javax.jcr.Credentials;
 import javax.jcr.Repository;
 import javax.jcr.SimpleCredentials;
+import javax.jcr.nodetype.NodeTypeManager;
 import org.apache.jackrabbit.oak.Oak;
 import org.apache.jackrabbit.oak.api.ContentRepository;
 import org.apache.jackrabbit.oak.jcr.Jcr;
@@ -25,6 +26,7 @@ import org.apache.jackrabbit.oak.plugins.nodetype.write.InitialContent;
 import org.apache.jackrabbit.oak.security.SecurityProviderImpl;
 import org.apache.jackrabbit.oak.spi.commit.DefaultEditor;
 import org.apache.jackrabbit.oak.spi.state.NodeStore;
+import org.jumlabs.jcr.oak.rpc.api.impl.JNodeTypeManagerImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.RepositoryImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.JRootServiceImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.JTreeServiceImpl;
@@ -113,13 +115,19 @@ public class AppConfiguration {
         return service;
     }
     
-
+    @Bean
+    public JNodeTypeManager nodeTypeManager(){
+        JNodeTypeManager service = new JNodeTypeManagerImpl();
+        return service;
+    }
 
    @Bean 
    public TRootService.Processor rootProcessor(){
        TRootService.Processor processor = new TRootService.Processor(root());
        return processor;
    }
+   
+   
    
    @Bean 
    public TTreeService.Processor treeProcessor(){

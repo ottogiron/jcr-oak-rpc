@@ -15,18 +15,25 @@ struct TPropertyDefinition {
     3:string name,
     4:bool isMultiple,
     5:bool isQueryOrderable,
-    6:bool isFullTextSercheable
+    6:bool isFullTextSercheable 
+    7:bool isAutocreated,
+    8:bool isMandatory,
+    9:bool isProtected,
+ 
 }
 
 struct TNodeDefinition {
     1:string defaultPrimaryType,
-    2:list<string> requiredPrimaryTypes,   
+    2:list<string> requiredPrimaryTypes,
+    3:string declaringNodeType,
+    4:string name,
 }
 
 struct TNodeType {
     1:string name,
     2:list<TPropertyDefinition> propertyDefinitions,
-    3:list<TNodeDefinition> childNodeDefinitions
+    3:list<TNodeDefinition> childNodeDefinitions,
+    
     
 }
 
