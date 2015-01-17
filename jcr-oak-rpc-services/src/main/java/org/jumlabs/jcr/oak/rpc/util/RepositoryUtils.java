@@ -12,8 +12,8 @@ import org.apache.jackrabbit.oak.api.ContentSession;
 import org.apache.jackrabbit.oak.api.Root;
 import org.apache.jackrabbit.oak.api.Tree;
 import org.jumlabs.jcr.oak.rpc.api.JRepository;
-import org.jumlabs.jcr.oak.rpc.api.thrift.TTree;
-import org.jumlabs.jcr.oak.rpc.api.thrift.TTreeStatus;
+import org.jumlabs.jcr.oak.rpc.thrift.TTree;
+import org.jumlabs.jcr.oak.rpc.thrift.TTreeStatus;
 import org.springframework.beans.BeanUtils;
 
 /**

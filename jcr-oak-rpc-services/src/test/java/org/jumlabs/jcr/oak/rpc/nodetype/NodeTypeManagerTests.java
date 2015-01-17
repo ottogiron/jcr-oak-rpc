@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.jumlabs.jcr.oak.rpc.api;
+package org.jumlabs.jcr.oak.rpc.nodetype;
 
+import org.jumlabs.jcr.oak.rpc.nodetype.JNodeTypeManager;
 import com.google.common.io.ByteStreams;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,11 +24,12 @@ import javax.security.auth.login.LoginException;
 import org.apache.jackrabbit.oak.api.ContentSession;
 import org.apache.jackrabbit.oak.api.Tree;
 import org.apache.thrift.TException;
-import org.jumlabs.jcr.oak.rpc.api.thrift.TNodeDefinition;
-import org.jumlabs.jcr.oak.rpc.api.thrift.TNodeType;
-import org.jumlabs.jcr.oak.rpc.api.thrift.TPropertyDefinition;
-import org.jumlabs.jcr.oak.rpc.api.thrift.TType;
-import org.jumlabs.jcr.oak.rpc.api.thrift.TValue;
+import org.jumlabs.jcr.oak.rpc.api.JRepository;
+import org.jumlabs.jcr.oak.rpc.thrift.TNodeDefinition;
+import org.jumlabs.jcr.oak.rpc.thrift.TNodeType;
+import org.jumlabs.jcr.oak.rpc.thrift.TPropertyDefinition;
+import org.jumlabs.jcr.oak.rpc.thrift.TType;
+import org.jumlabs.jcr.oak.rpc.thrift.TValue;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;

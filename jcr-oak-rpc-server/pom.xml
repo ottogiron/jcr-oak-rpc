@@ -40,5 +40,5 @@
             </plugin>
         </plugins>        
     </build>
-   
+    <name>jcr-oak-rpc-proxy-server</name>
 </project>

@@ -63,5 +63,5 @@
         <plugins>      
         </plugins>        
     </build>
-    
+    <name>jcr-oak-rpc-core</name>
 </project>

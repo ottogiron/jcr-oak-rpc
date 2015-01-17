@@ -1,6 +1,6 @@
 include "tree.thrift"
 
-namespace java org.jumlabs.jcr.oak.rpc.api.thrift
+namespace java org.jumlabs.jcr.oak.rpc.thrift
 
 service TRootService {
   tree.TTree getTree(1:string path), 

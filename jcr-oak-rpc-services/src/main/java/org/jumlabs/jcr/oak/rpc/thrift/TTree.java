@@ -4,7 +4,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package org.jumlabs.jcr.oak.rpc.api.thrift;
+package org.jumlabs.jcr.oak.rpc.thrift;
 
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
@@ -702,7 +702,7 @@ public class TTree implements org.apache.thrift.TBase<TTree, TTree._Fields>, jav
             break;
           case 5: // STATUS
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.status = org.jumlabs.jcr.oak.rpc.api.thrift.TTreeStatus.findByValue(iprot.readI32());
+              struct.status = org.jumlabs.jcr.oak.rpc.thrift.TTreeStatus.findByValue(iprot.readI32());
               struct.setStatusIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -816,7 +816,7 @@ public class TTree implements org.apache.thrift.TBase<TTree, TTree._Fields>, jav
         struct.setNameIsSet(true);
       }
       if (incoming.get(4)) {
-        struct.status = org.jumlabs.jcr.oak.rpc.api.thrift.TTreeStatus.findByValue(iprot.readI32());
+        struct.status = org.jumlabs.jcr.oak.rpc.thrift.TTreeStatus.findByValue(iprot.readI32());
         struct.setStatusIsSet(true);
       }
     }

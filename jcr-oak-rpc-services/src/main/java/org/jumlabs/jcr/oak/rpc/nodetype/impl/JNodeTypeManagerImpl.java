@@ -1,4 +1,4 @@
-package org.jumlabs.jcr.oak.rpc.api.impl;
+package org.jumlabs.jcr.oak.rpc.nodetype.impl;
 
 import com.google.common.io.ByteStreams;
 import java.io.IOException;
@@ -14,13 +14,13 @@ import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 import org.apache.thrift.TException;
-import org.jumlabs.jcr.oak.rpc.api.JNodeTypeManager;
+import org.jumlabs.jcr.oak.rpc.nodetype.JNodeTypeManager;
 import org.jumlabs.jcr.oak.rpc.api.JRepository;
-import org.jumlabs.jcr.oak.rpc.api.thrift.TNodeDefinition;
-import org.jumlabs.jcr.oak.rpc.api.thrift.TNodeType;
-import org.jumlabs.jcr.oak.rpc.api.thrift.TPropertyDefinition;
-import org.jumlabs.jcr.oak.rpc.api.thrift.TType;
-import org.jumlabs.jcr.oak.rpc.api.thrift.TValue;
+import org.jumlabs.jcr.oak.rpc.thrift.TNodeDefinition;
+import org.jumlabs.jcr.oak.rpc.thrift.TNodeType;
+import org.jumlabs.jcr.oak.rpc.thrift.TPropertyDefinition;
+import org.jumlabs.jcr.oak.rpc.thrift.TType;
+import org.jumlabs.jcr.oak.rpc.thrift.TValue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
