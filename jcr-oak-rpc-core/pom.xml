@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.jumlabs</groupId>
+        <artifactId>jcr-oak-rpc</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <properties>
+        <jackrabbit.oak.version>1.0.8</jackrabbit.oak.version>
+        <mongo.driver.version>2.12.2</mongo.driver.version>
+    </properties>
+    <packaging>jar</packaging>
+    <artifactId>jcr-oak-rpc-core</artifactId>
+    <name>jcr-oak-rpc-core</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.jackrabbit</groupId>
+            <artifactId>oak-jcr</artifactId>
+            <version>${jackrabbit.oak.version}</version>
+        </dependency>    
+        <dependency>
+            <groupId>org.apache.jackrabbit</groupId>
+            <artifactId>oak-mk</artifactId>
+            <version>${jackrabbit.oak.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jackrabbit</groupId>
+            <artifactId>oak-mk-api</artifactId>
+            <version>${jackrabbit.oak.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.jcr</groupId>
+            <artifactId>jcr</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongo.driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>  
+        </dependency>
+        <dependency>
+             <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+        </dependency>
+        
+        <!-- Spring boot-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-parent</artifactId>                       
+            <type>pom</type>
+        </dependency>        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>            
+        </dependency>
+        
+    </dependencies>
+    <build>
+        <plugins>      
+        </plugins>        
+    </build>
+    
+</project>

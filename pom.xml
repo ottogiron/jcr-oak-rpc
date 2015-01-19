@@ -6,8 +6,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>jcr-oak-rpc-server</module>
-        <module>jcr-oak-rpc-services</module>
+        <module>jcr-oak-rpc-proxy-server</module>
+        <module>jcr-oak-rpc-core</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,15 +15,10 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <skip.deployment>false</skip.deployment>
         <spring.version>4.1.3.RELEASE</spring.version>
+        <spring.boot.version>1.1.9.RELEASE</spring.boot.version>
     </properties>
     <dependencyManagement>
-        <dependencies>      
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
-                <version>1.1.9.RELEASE</version>
-                <type>pom</type>
-            </dependency>      
+        <dependencies>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
@@ -36,7 +31,7 @@
                         <artifactId>commons-logging</artifactId>
                     </exclusion>
                 </exclusions>
-            </dependency>  
+            </dependency>
             <dependency>
                 <groupId>org.apache.thrift</groupId>
                 <artifactId>libthrift</artifactId>
@@ -46,38 +41,57 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>17.0</version>
-            </dependency>            
-      
+            </dependency>
+            <!--Spring boot-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <type>pom</type>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring.boot.version}</version>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
     <build>
         <pluginManagement>
-            <plugins>          
-     
+            <plugins>
+
                 <!-- (2) END -->
             </plugins>
-        </pluginManagement> 
+        </pluginManagement>
         <plugins>
-   
+
         </plugins>
     </build>
-    
+
     <dependencies>
         <!--Spring framework-->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>            
-                      
+            <artifactId>spring-context</artifactId>
+
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            
+
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            
+
         </dependency>
         <!--Junit-->
         <dependency>
@@ -91,13 +105,13 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.7</version>
-            
+
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.1.2</version>                   
-        </dependency>        
+            <version>1.1.2</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
