@@ -54,8 +54,7 @@ public class NodeTypeServiceTests {
     
     @Test
     public void testCanAddChildNodeWithName()  {
-        boolean canAddChildNodeWithName = false;
-        
+        boolean canAddChildNodeWithName = false;        
         Session session = null;
         try{        
             session = repository.jcrLoginAdministrative();
@@ -64,7 +63,8 @@ public class NodeTypeServiceTests {
             canAddChildNodeWithName = nodeType.canAddChildNode("archivo","nt:file");
             assertTrue(canAddChildNodeWithName);
         }
-        catch(Exception e){            
+        catch(Exception e){
+            fail(e.getMessage());
         }
         finally{
             if(session != null){
@@ -73,5 +73,7 @@ public class NodeTypeServiceTests {
         }
         
     }
+    
+
 
 }

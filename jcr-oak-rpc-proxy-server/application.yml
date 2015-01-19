@@ -3,3 +3,4 @@ connection:
     mongoDB: MongoJCRSmartAdmin
     oakUser: admin
     oakPassword: admin
+    proxyPort: 9090

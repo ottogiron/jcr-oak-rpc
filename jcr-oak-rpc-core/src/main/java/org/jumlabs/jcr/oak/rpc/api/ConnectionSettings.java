@@ -15,6 +15,7 @@ public class ConnectionSettings {
     private String mongoDB = "MongoJCRSmartAdminTests";
     private String oakUser = "admin";
     private String oakPassword = "admin";
+    private int proxyPort =  9090;
 
     public String getMongoHost() {
         return mongoHost;
@@ -46,6 +47,14 @@ public class ConnectionSettings {
 
     public void setOakPassword(String oakPassword) {
         this.oakPassword = oakPassword;
+    }
+
+    public int getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(int thriftProxyPort) {
+        this.proxyPort = thriftProxyPort;
     }
     
     

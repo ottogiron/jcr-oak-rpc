@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.jumlabs.jcr.oak.rpc.server;
-import org.apache.thrift.TMultiplexedProcessor;
+
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.THsHaServer;
@@ -14,13 +10,12 @@ import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 import org.apache.thrift.transport.TTransportException;
-import org.jumlabs.jcr.oak.rpc.thrift.nodetype.TNodeTypeManager;
-import org.jumlabs.jcr.oak.rpc.thrift.api.TRootService;
-import org.jumlabs.jcr.oak.rpc.thrift.api.TTreeService;
+import org.jumlabs.jcr.oak.rpc.api.ConnectionSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 
 
@@ -30,22 +25,25 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan(basePackages = "org.jumlabs.jcr.oak.rpc.api")
+@EnableConfigurationProperties(ConnectionSettings.class)
+@ComponentScan(basePackages = "org.jumlabs.jcr.oak.rpc")
 public class Application implements CommandLineRunner{
+    
     @Autowired
-    private TRootService.Processor rootProcessor;
-    @Autowired
-    private TTreeService.Processor treeProcessor;
-    @Autowired
-    private TNodeTypeManager.Processor nodeTypeManagerProcessor;
-    private static int SERVER_PORT = 9090;
+    private ConnectionSettings connectionSettings;
+    
+    @Autowired 
+    private TProcessor mainProcessor;
+    
+
+    
     public static void main(String[] args) {
          SpringApplication.run(Application.class, args);
     }
     
-        public static void simple(TProcessor processor) throws TTransportException {
+        public static void simple(TProcessor processor, int serverPort) throws TTransportException {
 
-        TServerTransport serverTransport = new TServerSocket(SERVER_PORT);
+        TServerTransport serverTransport = new TServerSocket(serverPort);
 
        TServer server = new TSimpleServer(new TServer.Args(serverTransport).processor(processor));
         System.out.println("Starting the simple server...");
@@ -53,15 +51,17 @@ public class Application implements CommandLineRunner{
 
     }
 
-    public static void nonBlocking(TProcessor processor) throws TTransportException {
+    public static void nonBlocking(TProcessor processor, int serverPort) throws TTransportException {
         try{
-                TNonblockingServerSocket serverTransport = new TNonblockingServerSocket(SERVER_PORT);
+           System.out.println("Starting server on port "+serverPort+" ...");
+            TNonblockingServerSocket serverTransport = new TNonblockingServerSocket(serverPort);
            THsHaServer server = new THsHaServer(
                    new THsHaServer.Args(serverTransport)
                    .processor(processor)                
                    .protocolFactory(new TBinaryProtocol.Factory(false, false)));       
-           System.out.println("Starting server on port "+SERVER_PORT+" ...");
+           
            server.serve();
+           System.out.println("Server started on port "+serverPort);
         }
         catch(Exception e){
             System.out.println("Error on the server:" + e.getMessage());
@@ -70,12 +70,8 @@ public class Application implements CommandLineRunner{
     }
 
     @Override
-    public void run(String... strings) throws Exception {
-        TMultiplexedProcessor processor = new TMultiplexedProcessor();        
-        processor.registerProcessor("TRootService", rootProcessor);
-        processor.registerProcessor("TTreeService", treeProcessor);
-        processor.registerProcessor("TNodeTypeManager", nodeTypeManagerProcessor);
-        nonBlocking(processor);
+    public void run(String... strings) throws Exception {        
+        nonBlocking(mainProcessor,connectionSettings.getProxyPort());
     }
     
     

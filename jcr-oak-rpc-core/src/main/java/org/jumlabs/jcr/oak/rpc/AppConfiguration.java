@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package org.jumlabs.jcr.oak.rpc.api;
+package org.jumlabs.jcr.oak.rpc;
 
 import org.jumlabs.jcr.oak.rpc.nodetype.JNodeTypeManager;
 import org.jumlabs.jcr.oak.rpc.thrift.api.TTreeService;
@@ -14,7 +14,6 @@ import java.net.UnknownHostException;
 import javax.jcr.Credentials;
 import javax.jcr.Repository;
 import javax.jcr.SimpleCredentials;
-import javax.jcr.nodetype.NodeTypeManager;
 import org.apache.jackrabbit.oak.Oak;
 import org.apache.jackrabbit.oak.api.ContentRepository;
 import org.apache.jackrabbit.oak.jcr.Jcr;
@@ -27,16 +26,26 @@ import org.apache.jackrabbit.oak.plugins.nodetype.write.InitialContent;
 import org.apache.jackrabbit.oak.security.SecurityProviderImpl;
 import org.apache.jackrabbit.oak.spi.commit.DefaultEditor;
 import org.apache.jackrabbit.oak.spi.state.NodeStore;
+import org.apache.thrift.TMultiplexedProcessor;
+import org.apache.thrift.TProcessor;
+import org.jumlabs.jcr.oak.rpc.api.ConnectionSettings;
+import org.jumlabs.jcr.oak.rpc.api.JRepository;
+import org.jumlabs.jcr.oak.rpc.api.JRootService;
+import org.jumlabs.jcr.oak.rpc.api.JTreeService;
 import org.jumlabs.jcr.oak.rpc.nodetype.impl.JNodeTypeManagerImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.RepositoryImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.JRootServiceImpl;
 import org.jumlabs.jcr.oak.rpc.api.impl.JTreeServiceImpl;
+import org.jumlabs.jcr.oak.rpc.nodetype.JNodeTypeService;
+import org.jumlabs.jcr.oak.rpc.nodetype.impl.JNodeTypeServiceImpl;
 import org.jumlabs.jcr.oak.rpc.thrift.nodetype.TNodeTypeManager;
+import org.jumlabs.jcr.oak.rpc.thrift.nodetype.TNodeTypeService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 /**
  *
@@ -122,8 +131,14 @@ public class AppConfiguration {
         JNodeTypeManager service = new JNodeTypeManagerImpl();
         return service;
     }
+    
+    @Bean
+    public JNodeTypeService nodeTypeService(){
+        JNodeTypeService service = new JNodeTypeServiceImpl();
+        return service;
+    }
 
-   @Bean 
+   
    public TRootService.Processor rootProcessor(){
        TRootService.Processor processor = new TRootService.Processor(root());
        return processor;
@@ -131,15 +146,28 @@ public class AppConfiguration {
    
    
    
-   @Bean 
+   
    public TTreeService.Processor treeProcessor(){
        TTreeService.Processor processor = new TTreeService.Processor<>(treeService());
        return processor;
    }
    
-   @Bean
+
    public TNodeTypeManager.Processor nodeTypeManagerProcessor(){
        TNodeTypeManager.Processor processor = new TNodeTypeManager.Processor<>(nodeTypeManager());
        return processor;
+   }
+   
+   
+   
+   @Bean
+   @Primary
+   public TProcessor mainMultiplexerProcessor(){
+         TMultiplexedProcessor processor = new TMultiplexedProcessor();        
+        processor.registerProcessor("TRootService", rootProcessor());
+        processor.registerProcessor("TTreeService", treeProcessor());
+        processor.registerProcessor("TNodeTypeManager", nodeTypeManagerProcessor());
+        processor.registerProcessor("TNodeTypeService", new TNodeTypeService.Processor<>(nodeTypeService()));
+        return processor;
    }
 }

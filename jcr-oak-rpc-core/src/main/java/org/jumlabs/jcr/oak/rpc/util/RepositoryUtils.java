@@ -7,6 +7,10 @@
 package org.jumlabs.jcr.oak.rpc.util;
 
 import javax.jcr.NoSuchWorkspaceException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeManager;
 import javax.security.auth.login.LoginException;
 import org.apache.jackrabbit.oak.api.ContentSession;
 import org.apache.jackrabbit.oak.api.Root;
@@ -14,6 +18,7 @@ import org.apache.jackrabbit.oak.api.Tree;
 import org.jumlabs.jcr.oak.rpc.api.JRepository;
 import org.jumlabs.jcr.oak.rpc.thrift.api.TTree;
 import org.jumlabs.jcr.oak.rpc.thrift.api.TTreeStatus;
+import org.jumlabs.jcr.oak.rpc.thrift.nodetype.TNodeType;
 import org.springframework.beans.BeanUtils;
 
 /**
@@ -57,5 +62,12 @@ public class RepositoryUtils {
                     break;
             }
        return ttree;
+   }
+   
+   public static NodeType getNodeType(Session session, TNodeType tnodeType) throws RepositoryException{      
+        NodeTypeManager jcrNodeTypeManager = session.getWorkspace().getNodeTypeManager();
+        NodeType nodeType = jcrNodeTypeManager.getNodeType(tnodeType.getName());
+        return nodeType;
+     
    }
 }
