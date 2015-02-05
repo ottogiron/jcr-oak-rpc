@@ -47,14 +47,18 @@ public class JTreeServiceImpl implements JTreeService {
     @Override
     public TTree addChild(String name, TTree ttree) throws TException {
        TTree childTTree = null;
+        Root root = null;
         try {
-            Root root = RepositoryUtils.getJCRRoot(repository);
+            root = RepositoryUtils.getJCRRoot(repository);
             Tree tree = root.getTree(ttree.getPath());
             Tree childTree = tree.addChild(name);
             root.commit();
             childTTree = RepositoryUtils.toTTree(childTree);            
         } catch (LoginException | NoSuchWorkspaceException | CommitFailedException ex) {
             logger.error(ex.getMessage(), ex);
+        }
+        finally{
+            RepositoryUtils.closeSession(root);
         }
         return childTTree;
     }
@@ -124,11 +128,13 @@ public class JTreeServiceImpl implements JTreeService {
     }
 
     @Override
-    public void setPropertiesValue(Map<String,TPropertyState> values, TTree ttree) throws TException {
+    public void setPropertiesValue(List<TPropertyState> values, TTree ttree) throws TException {
           try {
             Tree tree = RepositoryUtils.getTree(repository, ttree);            
-            values.forEach((key,propertyState) -> {                
+            
+            values.forEach((propertyState) -> {                
                 TType type = propertyState.getType();
+                String key = propertyState.getName();
                 switch(type){
                     case BINARIES:
                         tree.setProperty(key,propertyState.getBinaryValues());
@@ -266,14 +272,18 @@ public class JTreeServiceImpl implements JTreeService {
     @Override
     public boolean remove(TTree ttree) throws TException {
         boolean removed = false;
+        Root root = null;
         try {
-            Root root = RepositoryUtils.getJCRRoot(repository);
+             root = RepositoryUtils.getJCRRoot(repository);
             Tree tree = root.getTree(ttree.getPath());            
             removed = tree.remove();
             root.commit();
 
         } catch (LoginException | NoSuchWorkspaceException |  CommitFailedException ex) {
             logger.error(ex.getMessage(), ex);
+        }
+        finally{
+            RepositoryUtils.closeSession(root);
         }
         return removed;
     }

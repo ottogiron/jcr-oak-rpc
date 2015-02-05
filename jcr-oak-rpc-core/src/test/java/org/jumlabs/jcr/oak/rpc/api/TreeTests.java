@@ -6,10 +6,12 @@
 
 package org.jumlabs.jcr.oak.rpc.api;
 
+import java.io.IOException;
 import org.jumlabs.jcr.oak.rpc.thrift.api.TTree;
 import javax.jcr.NoSuchWorkspaceException;
 import javax.security.auth.login.LoginException;
 import org.apache.jackrabbit.oak.api.CommitFailedException;
+import org.apache.jackrabbit.oak.api.ContentSession;
 import org.apache.jackrabbit.oak.api.Root;
 import org.apache.jackrabbit.oak.api.Tree;
 import org.apache.thrift.TException;
@@ -39,20 +41,28 @@ public class TreeTests {
     private JRepository repository;
     
     @Test
-    public void testAddChild() throws NoSuchWorkspaceException, LoginException, TException, CommitFailedException{
+    public void testAddChild() throws NoSuchWorkspaceException, LoginException, TException, CommitFailedException, IOException{
         String parentName =  TestUtils.randomIdentifier();
         String childName = TestUtils.randomIdentifier();
-        Root root = RepositoryUtils.getJCRRoot(repository);
-        Tree rootTree = root.getTree("/");
-        Tree parentTree =  rootTree.addChild(parentName);
-        root.commit();
-        TTree parentTTree = RepositoryUtils.toTTree(parentTree);
-        TTree ttreChilde =  treeService.addChild(childName, parentTTree);
-      
-        assertEquals("/"+parentName+"/"+childName, ttreChilde.getPath());
-        //clean 
-        rootTree.getChild(parentName).remove();
-        root.commit();
+
+        Tree rootTree;
+        Tree parentTree;
+        
+        try (ContentSession session = repository.loginAdministrative(null)) {
+            Root root;
+            root = session.getLatestRoot();
+            rootTree = root.getTree("/");
+            parentTree = rootTree.addChild(parentName);
+            root.commit();
+            //session.close();
+        }
+//        
+//        TTree parentTTree = RepositoryUtils.toTTree(parentTree);
+//        TTree ttreChilde =  treeService.addChild(childName, parentTTree);
+//        assertEquals("/"+parentName+"/"+childName, ttreChilde.getPath());
+
+        
+        
     }
     
     

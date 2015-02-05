@@ -19,6 +19,8 @@ import org.jumlabs.jcr.oak.rpc.api.JRepository;
 import org.jumlabs.jcr.oak.rpc.thrift.api.TTree;
 import org.jumlabs.jcr.oak.rpc.thrift.api.TTreeStatus;
 import org.jumlabs.jcr.oak.rpc.thrift.nodetype.TNodeType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 
 /**
@@ -27,6 +29,8 @@ import org.springframework.beans.BeanUtils;
  */
 public class RepositoryUtils {
     
+    
+    private static final Logger logger = LoggerFactory.getLogger(RepositoryUtils.class);
      public static Tree getTree(JRepository repository,String path) throws LoginException, NoSuchWorkspaceException{
        Tree tree = null;
        if(path != null){
@@ -69,5 +73,16 @@ public class RepositoryUtils {
         NodeType nodeType = jcrNodeTypeManager.getNodeType(tnodeType.getName());
         return nodeType;
      
+   }
+   
+   public static void closeSession(Root root){
+       if(root != null){
+           try{
+               root.getContentSession().close();
+           }
+           catch(Exception e){
+               logger.error(e.getMessage());
+           }
+       }
    }
 }

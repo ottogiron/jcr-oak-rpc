@@ -46,7 +46,7 @@ service TTreeService{
   TTree getParent(1:TTree tree), 
   map<string,TPropertyState> getPropertiesByNames(1:list<string> propertyNames,2:TTree ttree),
   map<string,TPropertyState> getProperties(1:TTree ttree),
-  void setPropertiesValue(1:map<string,TPropertyState> values,2:TTree ttree),
+  void setPropertiesValue(1:list<TPropertyState> values,2:TTree ttree),
   bool remove(1:TTree tree)
 }
 
