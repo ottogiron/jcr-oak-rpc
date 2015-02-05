@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.jcr.AccessDeniedException;
 import javax.jcr.NoSuchWorkspaceException;
 import javax.security.auth.login.LoginException;
 import org.apache.jackrabbit.oak.api.Blob;
@@ -46,16 +47,17 @@ public class JTreeServiceImpl implements JTreeService {
     
 
     @Override
-    public TTree addChild(String name, TTree ttree) throws TException {
+    public TTree addChild(String name, String primaryType, TTree ttree) throws TException {
        TTree childTTree = null;
         Root root = null;
         try {
             root = RepositoryUtils.getJCRRoot(repository);
             Tree tree = root.getTree(ttree.getPath());
-            Tree childTree = tree.addChild(name);
+            NodeUtil treeNodeUtil = new NodeUtil(tree);
+            Tree childTree = treeNodeUtil.addChild(name, primaryType).getTree();
             root.commit();
             childTTree = RepositoryUtils.toTTree(childTree);            
-        } catch (LoginException | NoSuchWorkspaceException | CommitFailedException ex) {
+        } catch (LoginException | NoSuchWorkspaceException | AccessDeniedException | CommitFailedException ex) {
             logger.error(ex.getMessage(), ex);
         }
         finally{

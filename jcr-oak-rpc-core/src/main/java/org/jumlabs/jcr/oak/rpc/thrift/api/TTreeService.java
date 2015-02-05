@@ -39,7 +39,7 @@ public class TTreeService {
 
   public interface Iface {
 
-    public TTree addChild(String name, TTree tree) throws org.apache.thrift.TException;
+    public TTree addChild(String name, String primaryType, TTree tree) throws org.apache.thrift.TException;
 
     public List<TTree> getChildren(TTree tree) throws org.apache.thrift.TException;
 
@@ -59,7 +59,7 @@ public class TTreeService {
 
   public interface AsyncIface {
 
-    public void addChild(String name, TTree tree, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void addChild(String name, String primaryType, TTree tree, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void getChildren(TTree tree, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -97,16 +97,17 @@ public class TTreeService {
       super(iprot, oprot);
     }
 
-    public TTree addChild(String name, TTree tree) throws org.apache.thrift.TException
+    public TTree addChild(String name, String primaryType, TTree tree) throws org.apache.thrift.TException
     {
-      send_addChild(name, tree);
+      send_addChild(name, primaryType, tree);
       return recv_addChild();
     }
 
-    public void send_addChild(String name, TTree tree) throws org.apache.thrift.TException
+    public void send_addChild(String name, String primaryType, TTree tree) throws org.apache.thrift.TException
     {
       addChild_args args = new addChild_args();
       args.setName(name);
+      args.setPrimaryType(primaryType);
       args.setTree(tree);
       sendBase("addChild", args);
     }
@@ -300,19 +301,21 @@ public class TTreeService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void addChild(String name, TTree tree, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void addChild(String name, String primaryType, TTree tree, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      addChild_call method_call = new addChild_call(name, tree, resultHandler, this, ___protocolFactory, ___transport);
+      addChild_call method_call = new addChild_call(name, primaryType, tree, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class addChild_call extends org.apache.thrift.async.TAsyncMethodCall {
       private String name;
+      private String primaryType;
       private TTree tree;
-      public addChild_call(String name, TTree tree, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public addChild_call(String name, String primaryType, TTree tree, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.name = name;
+        this.primaryType = primaryType;
         this.tree = tree;
       }
 
@@ -320,6 +323,7 @@ public class TTreeService {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("addChild", org.apache.thrift.protocol.TMessageType.CALL, 0));
         addChild_args args = new addChild_args();
         args.setName(name);
+        args.setPrimaryType(primaryType);
         args.setTree(tree);
         args.write(prot);
         prot.writeMessageEnd();
@@ -607,7 +611,7 @@ public class TTreeService {
 
       public addChild_result getResult(I iface, addChild_args args) throws org.apache.thrift.TException {
         addChild_result result = new addChild_result();
-        result.success = iface.addChild(args.name, args.tree);
+        result.success = iface.addChild(args.name, args.primaryType, args.tree);
         return result;
       }
     }
@@ -824,7 +828,7 @@ public class TTreeService {
       }
 
       public void start(I iface, addChild_args args, org.apache.thrift.async.AsyncMethodCallback<TTree> resultHandler) throws TException {
-        iface.addChild(args.name, args.tree,resultHandler);
+        iface.addChild(args.name, args.primaryType, args.tree,resultHandler);
       }
     }
 
@@ -1191,7 +1195,8 @@ public class TTreeService {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("addChild_args");
 
     private static final org.apache.thrift.protocol.TField NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("name", org.apache.thrift.protocol.TType.STRING, (short)1);
-    private static final org.apache.thrift.protocol.TField TREE_FIELD_DESC = new org.apache.thrift.protocol.TField("tree", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+    private static final org.apache.thrift.protocol.TField PRIMARY_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("primaryType", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField TREE_FIELD_DESC = new org.apache.thrift.protocol.TField("tree", org.apache.thrift.protocol.TType.STRUCT, (short)3);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -1200,12 +1205,14 @@ public class TTreeService {
     }
 
     public String name; // required
+    public String primaryType; // required
     public TTree tree; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       NAME((short)1, "name"),
-      TREE((short)2, "tree");
+      PRIMARY_TYPE((short)2, "primaryType"),
+      TREE((short)3, "tree");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -1222,7 +1229,9 @@ public class TTreeService {
         switch(fieldId) {
           case 1: // NAME
             return NAME;
-          case 2: // TREE
+          case 2: // PRIMARY_TYPE
+            return PRIMARY_TYPE;
+          case 3: // TREE
             return TREE;
           default:
             return null;
@@ -1269,6 +1278,8 @@ public class TTreeService {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.NAME, new org.apache.thrift.meta_data.FieldMetaData("name", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.PRIMARY_TYPE, new org.apache.thrift.meta_data.FieldMetaData("primaryType", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       tmpMap.put(_Fields.TREE, new org.apache.thrift.meta_data.FieldMetaData("tree", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TTree.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -1280,10 +1291,12 @@ public class TTreeService {
 
     public addChild_args(
       String name,
+      String primaryType,
       TTree tree)
     {
       this();
       this.name = name;
+      this.primaryType = primaryType;
       this.tree = tree;
     }
 
@@ -1293,6 +1306,9 @@ public class TTreeService {
     public addChild_args(addChild_args other) {
       if (other.isSetName()) {
         this.name = other.name;
+      }
+      if (other.isSetPrimaryType()) {
+        this.primaryType = other.primaryType;
       }
       if (other.isSetTree()) {
         this.tree = new TTree(other.tree);
@@ -1306,6 +1322,7 @@ public class TTreeService {
     @Override
     public void clear() {
       this.name = null;
+      this.primaryType = null;
       this.tree = null;
     }
 
@@ -1330,6 +1347,30 @@ public class TTreeService {
     public void setNameIsSet(boolean value) {
       if (!value) {
         this.name = null;
+      }
+    }
+
+    public String getPrimaryType() {
+      return this.primaryType;
+    }
+
+    public addChild_args setPrimaryType(String primaryType) {
+      this.primaryType = primaryType;
+      return this;
+    }
+
+    public void unsetPrimaryType() {
+      this.primaryType = null;
+    }
+
+    /** Returns true if field primaryType is set (has been assigned a value) and false otherwise */
+    public boolean isSetPrimaryType() {
+      return this.primaryType != null;
+    }
+
+    public void setPrimaryTypeIsSet(boolean value) {
+      if (!value) {
+        this.primaryType = null;
       }
     }
 
@@ -1367,6 +1408,14 @@ public class TTreeService {
         }
         break;
 
+      case PRIMARY_TYPE:
+        if (value == null) {
+          unsetPrimaryType();
+        } else {
+          setPrimaryType((String)value);
+        }
+        break;
+
       case TREE:
         if (value == null) {
           unsetTree();
@@ -1382,6 +1431,9 @@ public class TTreeService {
       switch (field) {
       case NAME:
         return getName();
+
+      case PRIMARY_TYPE:
+        return getPrimaryType();
 
       case TREE:
         return getTree();
@@ -1399,6 +1451,8 @@ public class TTreeService {
       switch (field) {
       case NAME:
         return isSetName();
+      case PRIMARY_TYPE:
+        return isSetPrimaryType();
       case TREE:
         return isSetTree();
       }
@@ -1427,6 +1481,15 @@ public class TTreeService {
           return false;
       }
 
+      boolean this_present_primaryType = true && this.isSetPrimaryType();
+      boolean that_present_primaryType = true && that.isSetPrimaryType();
+      if (this_present_primaryType || that_present_primaryType) {
+        if (!(this_present_primaryType && that_present_primaryType))
+          return false;
+        if (!this.primaryType.equals(that.primaryType))
+          return false;
+      }
+
       boolean this_present_tree = true && this.isSetTree();
       boolean that_present_tree = true && that.isSetTree();
       if (this_present_tree || that_present_tree) {
@@ -1447,6 +1510,11 @@ public class TTreeService {
       list.add(present_name);
       if (present_name)
         list.add(name);
+
+      boolean present_primaryType = true && (isSetPrimaryType());
+      list.add(present_primaryType);
+      if (present_primaryType)
+        list.add(primaryType);
 
       boolean present_tree = true && (isSetTree());
       list.add(present_tree);
@@ -1470,6 +1538,16 @@ public class TTreeService {
       }
       if (isSetName()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.name, other.name);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetPrimaryType()).compareTo(other.isSetPrimaryType());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetPrimaryType()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.primaryType, other.primaryType);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -1509,6 +1587,14 @@ public class TTreeService {
         sb.append("null");
       } else {
         sb.append(this.name);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("primaryType:");
+      if (this.primaryType == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.primaryType);
       }
       first = false;
       if (!first) sb.append(", ");
@@ -1573,7 +1659,15 @@ public class TTreeService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
-            case 2: // TREE
+            case 2: // PRIMARY_TYPE
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.primaryType = iprot.readString();
+                struct.setPrimaryTypeIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // TREE
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.tree = new TTree();
                 struct.tree.read(iprot);
@@ -1602,6 +1696,11 @@ public class TTreeService {
           oprot.writeString(struct.name);
           oprot.writeFieldEnd();
         }
+        if (struct.primaryType != null) {
+          oprot.writeFieldBegin(PRIMARY_TYPE_FIELD_DESC);
+          oprot.writeString(struct.primaryType);
+          oprot.writeFieldEnd();
+        }
         if (struct.tree != null) {
           oprot.writeFieldBegin(TREE_FIELD_DESC);
           struct.tree.write(oprot);
@@ -1628,12 +1727,18 @@ public class TTreeService {
         if (struct.isSetName()) {
           optionals.set(0);
         }
-        if (struct.isSetTree()) {
+        if (struct.isSetPrimaryType()) {
           optionals.set(1);
         }
-        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetTree()) {
+          optionals.set(2);
+        }
+        oprot.writeBitSet(optionals, 3);
         if (struct.isSetName()) {
           oprot.writeString(struct.name);
+        }
+        if (struct.isSetPrimaryType()) {
+          oprot.writeString(struct.primaryType);
         }
         if (struct.isSetTree()) {
           struct.tree.write(oprot);
@@ -1643,12 +1748,16 @@ public class TTreeService {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, addChild_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(2);
+        BitSet incoming = iprot.readBitSet(3);
         if (incoming.get(0)) {
           struct.name = iprot.readString();
           struct.setNameIsSet(true);
         }
         if (incoming.get(1)) {
+          struct.primaryType = iprot.readString();
+          struct.setPrimaryTypeIsSet(true);
+        }
+        if (incoming.get(2)) {
           struct.tree = new TTree();
           struct.tree.read(iprot);
           struct.setTreeIsSet(true);

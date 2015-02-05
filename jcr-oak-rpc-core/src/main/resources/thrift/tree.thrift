@@ -40,7 +40,7 @@ struct TTree {
 
 
 service TTreeService{
-  TTree addChild(1:string name, 2:TTree tree),
+  TTree addChild(1:string name, 2:string primaryType, 3:TTree tree),
   list<TTree> getChildren(1:TTree tree),
   TTree getChild(1:string name, 2:TTree tree),
   TTree getParent(1:TTree tree), 

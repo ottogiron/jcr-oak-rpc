@@ -61,7 +61,7 @@ public class TreeTests {
             root = session.getLatestRoot();
             rootTree = root.getTree("/");
             TTree parentTTree = RepositoryUtils.toTTree(rootTree);
-            TTree ttreChilde =  treeService.addChild(childName, parentTTree);
+            TTree ttreChilde =  treeService.addChild(childName, JcrConstants.NT_UNSTRUCTURED, parentTTree);
             session.close();
             assertEquals("/"+childName, ttreChilde.getPath());
             
