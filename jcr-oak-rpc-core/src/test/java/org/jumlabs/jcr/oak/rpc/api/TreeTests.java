@@ -42,24 +42,21 @@ public class TreeTests {
     
     @Test
     public void testAddChild() throws NoSuchWorkspaceException, LoginException, TException, CommitFailedException, IOException{
-        String parentName =  TestUtils.randomIdentifier();
-        String childName = TestUtils.randomIdentifier();
-
-        Tree rootTree;
-        Tree parentTree;
         
+        String childName = TestUtils.randomIdentifier();
+        Tree rootTree;
+    
         try (ContentSession session = repository.loginAdministrative(null)) {
             Root root;
             root = session.getLatestRoot();
             rootTree = root.getTree("/");
-            parentTree = rootTree.addChild(parentName);
-            root.commit();
+            TTree parentTTree = RepositoryUtils.toTTree(rootTree);
+            TTree ttreChilde =  treeService.addChild(childName, parentTTree);
+            assertEquals("/"+childName, ttreChilde.getPath());
             //session.close();
         }
-//        
-//        TTree parentTTree = RepositoryUtils.toTTree(parentTree);
-//        TTree ttreChilde =  treeService.addChild(childName, parentTTree);
-//        assertEquals("/"+parentName+"/"+childName, ttreChilde.getPath());
+        
+        
 
         
         

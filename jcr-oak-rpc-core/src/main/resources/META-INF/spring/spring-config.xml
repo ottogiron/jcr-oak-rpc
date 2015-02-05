@@ -12,7 +12,7 @@
        http://www.eclipse.org/gemini/blueprint/schema/blueprint/gemini-blueprint.xsd">
    
     <context:annotation-config/>
-    <context:component-scan base-package="org.jumlabs.jcr.oak.rpc"/>
+    <context:component-scan base-package="org.jumlabs.jcr.oak.rpc.test"/>
     <!-- services -->    <!-- more bean definitions for services go here -->
 
 </beans>

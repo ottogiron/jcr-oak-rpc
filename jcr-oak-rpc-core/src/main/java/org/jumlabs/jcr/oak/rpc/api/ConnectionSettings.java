@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "connection")
 public class ConnectionSettings {
     private String mongoHost = "localhost";
-    private String mongoDB = "MongoJCRSmartAdminTests";
+    private String mongoDB = "MongoJCRSmartAdmin";
     private String oakUser = "admin";
     private String oakPassword = "admin";
     private int proxyPort =  9090;
