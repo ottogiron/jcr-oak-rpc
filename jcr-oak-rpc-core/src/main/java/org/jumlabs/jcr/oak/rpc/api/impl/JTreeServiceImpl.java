@@ -21,6 +21,7 @@ import org.apache.jackrabbit.oak.api.PropertyState;
 import org.apache.jackrabbit.oak.api.Root;
 import org.apache.jackrabbit.oak.api.Tree;
 import org.apache.jackrabbit.oak.api.Type;
+import org.apache.jackrabbit.oak.util.NodeUtil;
 import org.apache.thrift.TException;
 import org.jumlabs.jcr.oak.rpc.api.JRepository;
 import org.jumlabs.jcr.oak.rpc.api.JTreeService;
@@ -129,8 +130,11 @@ public class JTreeServiceImpl implements JTreeService {
 
     @Override
     public void setPropertiesValue(List<TPropertyState> values, TTree ttree) throws TException {
+          Root root = null;
           try {
-            Tree tree = RepositoryUtils.getTree(repository, ttree);            
+            root = RepositoryUtils.getJCRRoot(repository);
+            Tree tree = root.getTree(ttree.getPath());
+            NodeUtil nodeUtil = new NodeUtil(tree);
             
             values.forEach((propertyState) -> {                
                 TType type = propertyState.getType();
@@ -180,10 +184,14 @@ public class JTreeServiceImpl implements JTreeService {
       
                 
             });
+            root.commit();
             
-        } catch (LoginException | NoSuchWorkspaceException ex) {
+        } catch (LoginException | CommitFailedException | NoSuchWorkspaceException ex) {
             logger.error(ex.getMessage(), ex);
         }
+        finally{
+              RepositoryUtils.closeSession(root);
+          }
     }
     
     
